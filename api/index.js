@@ -7,7 +7,7 @@ module.exports = function(app, connection){
 	function db (req, res, next) {
 	  req.db = {
 	    User: connection.model('User', models.User, 'users'),
-	    Post: connection.model('Post', models.Post, 'posts')
+	    Post: connection.model('Post', models.Post, 'posts'),
 	    Talent: connection.model('Talent', models.Talent, 'talents')
 	  };
 	  return next();
@@ -17,21 +17,30 @@ module.exports = function(app, connection){
 	app.post('/api/test', db, function(req, res, next){
 		
 		var user = new req.db.User({
-			"username": "alecrobins",
-			"first_name": "Alec",
-			"last_name": "Robins",
-			"email": "alecrobins@gmail.com",
+			"username": "newUser",
+			"first_name": "Test",
+			"last_name": "User",
+			"email": "test@example.com",
 			"password": "test",
-			"occupation": "Front End Developer",
+			"occupation": "Backend End Developer",
 			"social": {
-				"github": "github.com/alecrobins"
-				"website": "alecrobins.me",
+				"github": "github.com/testUser",
+				"website": "testUser.me",
 			}
 		});
 		
 		user.save(function(err) {
 		   if (err) next(err);
 		   res.json(user);
+		});
+
+	});
+
+	app.get('/api/test', db, function(req, res, next){
+
+		req.db.User.find().exec(function (err, user) {
+		  if (err) return handleError(err);
+		  res.json(user);
 		});
 
 	});

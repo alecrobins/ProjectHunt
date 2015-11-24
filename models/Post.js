@@ -12,7 +12,7 @@ exports.schema = new mongoose.Schema({
    	type: Schema.Types.ObjectId,
    	ref: 'User'
   	}],
-	"title": 
+	"title": { 
 		required: true,
 		type: String,
 		trim: true,
@@ -30,10 +30,12 @@ exports.schema = new mongoose.Schema({
 	}],
 	"created_at": {
 		required: true,
+		type: Date,
 		default: Date.now
 	},
 	"updated_at": {
 		required: true,
+		type: Date,
 		default: Date.now
     },
 	"feature_img": String,

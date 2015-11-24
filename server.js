@@ -5,51 +5,42 @@
  */
 
 var express = require('express'),
-  routes = require('./routes'),
-  api = requie('./api');
-  http = require('http'),
-  util = require('util'),
-  oauth = require('oauth'),
-  querystring = require('querystring'),
-  mongoose = require('mongoose');
+	bodyParser = require('body-parser'),
+	logger = require('morgan'),
+	routes = require('./routes'),
+	cookieParser = require('cookie-parser'),
+	cors = require('cors'),
+	api = require('./api');
+	http = require('http'),
+	util = require('util'),
+	mongoose = require('mongoose');
+
+var corsOptions = {
+  origin: process.env.PORT || 'http://localhost:3000'
+};
 
 var app = express();
 
-// Configure the express app
-app.configure(function(){
-  app.set('port', process.env.PORT || 3000  );
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
+app.set('port', process.env.PORT || 3000  );
+app.use(cors(corsOptions));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-  // app.use(express.cookieParser('asd;lfkajs;ldfkj'));
-  // app.use(express.session({
-  //   secret: '<h1>WHEEYEEE</h1>',
-  //   key: 'sid',
-  //   cookie: {
-  //     secret: true,
-  //     expires: false
-  //   }
-  // }));
-
-  app.use(express.static(__dirname + '/public'));
-  app.use(app.router);
-});
+app.use('/', express.static(__dirname + '/public'));
 
 // Configure the errors
-app.configure(function() {
-  app.use(logErrors);
-  app.use(clientErrorHandler);
-  app.use(errorHandler);
-});
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
 
 // connect to the db
 var mongoUri = process.env.MONGOHQ_URL
   || "mongodb://localhost/projectHunt";
 
-mongoose.connect(mongoUri);
-var connection = mongoose.createConnection(dbUrl);
+// mongoose.connect(mongoUri);
+var connection = mongoose.createConnection(mongoUri);
 
 // log on mongo connection error
 connection.on('error', console.error.bind(console,
