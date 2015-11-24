@@ -19,17 +19,22 @@ module.exports = function(app, connection){
 	function isLoggedIn(req, res, next) {
 
     	// if user is authenticated in the session, carry on
-    	if (req.isAuthenticated())
-        return next();
-
+    	if (req.isAuthenticated()){
+    		return next();
+    	}
+      
     	// if user isn't authenticated redirect to the login page
-   	res.redirect('/login');
+   	// res.redirect('/login');
+   	res.send(404);
 	}
 
 	// set up passport with mongo connection
 	routes.passport(connection);
 
 	// FACEBOOK AUTH
+	app.get('/testAuth', isLoggedIn, function(req,res){
+		res.json({"test": "allGood"});
+	});
 	app.get('/auth/facebook', passport.authenticate('facebook'));
 	app.get('/auth/facebook/callback',
   		passport.authenticate('facebook', {

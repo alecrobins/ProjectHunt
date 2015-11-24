@@ -37,18 +37,14 @@ module.exports = function(connection){
                     console.log(profile);
 
                     newUser.facebook.id = profile.id;
-                    newUser.facebook.token = profile.token;
+                    newUser.facebook.token = accessToken;
                     newUser.name  = profile.displayName;
                     newUser.email = profile.emails[0].value;
                     newUser.photo_url = 'http://graph.facebook.com/' + profile.id + '/picture';
 
-                    console.log("NEW USER");
-                    console.log(newUser);
-
                     // save our user to the database
                     newUser.save(function(err) {
                         if (err) throw err;
-                        console.log("SUCCESSFULLY SAVED");
                         // if successful, return the new user
                         return done(null, newUser);
                     });

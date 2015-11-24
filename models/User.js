@@ -35,7 +35,7 @@ var UserSchema = new mongoose.Schema({
 	},
 	"facebook":{
 		"id": String,
-		// "token": String,
+		"token": String,
 	},
 	"social": {
 		"github": String,
