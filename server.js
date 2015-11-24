@@ -12,7 +12,10 @@ var express = require('express'),
 	cors = require('cors'),
 	api = require('./api');
 	http = require('http'),
+	methodOverride = require('method-override'),
+	session = require('express-session'),
 	util = require('util'),
+	passport = require('passport'),
 	mongoose = require('mongoose');
 
 var corsOptions = {
@@ -26,7 +29,11 @@ app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(methodOverride());
+// app.use(session({ secret: process.env.SESSIONSECRET }));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', express.static(__dirname + '/public'));
 

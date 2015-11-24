@@ -1,20 +1,10 @@
 // User Monogo Schemea 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var findOrCreate = require('mongoose-findorcreate')
 
-exports.schema = new mongoose.Schema({
-	"username":{
-		required: true,
-		type: String,
-		max: 1000,
-		unique: true
-	},
-	"first_name": {
-		required: true,
-		type: String,
-		max: 1000
-	},
-	"last_name": {
+var UserSchema = new mongoose.Schema({
+	"name": {
 		required: true,
 		type: String,
 		max: 1000
@@ -23,7 +13,7 @@ exports.schema = new mongoose.Schema({
 		required: true,
 		type: String,
 		max: 1000,
-		unique: true
+		// unique: true
 	},
 	"banned": {
    	type: Boolean,
@@ -40,9 +30,12 @@ exports.schema = new mongoose.Schema({
 	},
 	"photo_url": String,
 	"occupation": {
-		required: true,
 		type: String,
 		max: 1000
+	},
+	"facebook":{
+		"id": String,
+		// "token": String,
 	},
 	"social": {
 		"github": String,
@@ -53,3 +46,8 @@ exports.schema = new mongoose.Schema({
 		"instagram": String
 	}
 });
+
+// add the findOrCreate plugin for user models
+UserSchema.plugin(findOrCreate);
+
+exports.schema = UserSchema;
