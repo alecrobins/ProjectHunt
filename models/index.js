@@ -1,3 +1,3 @@
-exports.Post = require('./Post');
-exports.User = require('./User');
-exports.Talent = require('./Talent');
+exports.Post = require('./Post').schema;
+exports.User = require('./User').schema;
+exports.Talent = require('./Talent').schema;

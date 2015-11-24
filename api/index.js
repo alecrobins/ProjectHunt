@@ -6,13 +6,14 @@ function db (req, res, next) {
   req.db = {
     User: connection.model('User', models.User, 'users'),
     Post: connection.model('Post', models.Post, 'posts')
+    Talent: connection.model('Talent', models.talent, 'talents')
   };
   return next();
 }
 
 //MAIN
-app.get('/api/profile', checkUser, db, routes.main.profile);
-app.del('/api/profile', checkUser, db, routes.main.delProfile);
+// app.get('/api/profile', checkUser, db, routes.main.profile);
+// app.del('/api/profile', checkUser, db, routes.main.delProfile);
 app.post('/api/login', db, routes.main.login);
 app.post('/api/logout', routes.main.logout);
 
@@ -30,16 +31,5 @@ app.post('/api/users', checkAdmin, db, routes.users.add);
 app.put('/api/users/:id', checkAdmin, db, routes.users.update);
 app.del('/api/users/:id', checkAdmin, db, routes.users.del);
 
-//APPLICATION
-app.post('/api/application',
-  checkAdmin,
-  db,
-  routes.application.add);
-app.put('/api/application',
-  checkApplicant,
-  db,
-  routes.application.update);
-app.get('/api/application',
-  checkApplicant,
-  db,
-  routes.application.get);
+//SEARCH
+app.get('/api/search/:query', db, routes.search.getPosts);

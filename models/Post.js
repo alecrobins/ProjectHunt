@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-exports.postSchemea = new mongoose.Schema({
+exports.schema = new mongoose.Schema({
  	"post_author": {
  		required: true,
  		type: Schema.Types.ObjectId,
@@ -37,9 +37,21 @@ exports.postSchemea = new mongoose.Schema({
 	"feature_img": String,
 	"imgs": [String],
 	"contact": {
-		"email": String,
-		"phone": String,
-		"github": String,
-		"website": String,
+		"email": {
+			type: String,
+			trim: true
+		},
+		"phone": {
+			type: String,
+			trim: true
+		},
+		"github": {
+			type: String,
+			trim: true
+		},
+		"website": {
+			type: String,
+			trim: true
+		},
 	}
 });
