@@ -13,7 +13,7 @@ var UserSchema = new mongoose.Schema({
 		required: true,
 		type: String,
 		max: 1000,
-		// unique: true
+		unique: true
 	},
 	"banned": {
    	type: Boolean,
