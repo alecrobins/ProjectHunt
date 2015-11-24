@@ -6,7 +6,7 @@ function db (req, res, next) {
   req.db = {
     User: connection.model('User', models.User, 'users'),
     Post: connection.model('Post', models.Post, 'posts')
-    Talent: connection.model('Talent', models.talent, 'talents')
+    Talent: connection.model('Talent', models.Talent, 'talents')
   };
   return next();
 }

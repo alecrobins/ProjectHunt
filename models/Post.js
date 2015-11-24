@@ -15,12 +15,14 @@ exports.schema = new mongoose.Schema({
 	"title": 
 		required: true,
 		type: String,
-		trim: true
+		trim: true,
+		max: 1000
 	},
 	"description": {
 		required: true,
 		type: String,
-		trim: true
+		trim: true,
+		max: 3000
 	},
 	"talent_needed": [{
 		type: Schema.Types.ObjectId,
