@@ -1,5 +1,12 @@
+/**
+ *
+ * Main Script ran on Heroku
+ *
+ */
+
 var express = require('express'),
   routes = require('./routes'),
+  api = requie('./api');
   http = require('http'),
   util = require('util'),
   oauth = require('oauth'),
@@ -75,8 +82,13 @@ function errorHandler(err, req, res, next) {
   res.send(500, {error: err.toString()});
 }
 
+// Set up routes by passing the app and connection to the mongoDB
+api(app, connection);
+
+// Start the server
 http.createServer(app);
 
+// Start listening on the given port
 app.listen(app.get('port'), function(){
  console.info('Express server listening on port '
    + app.get('port'));

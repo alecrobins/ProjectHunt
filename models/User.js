@@ -1,4 +1,6 @@
 // User Monogo Schemea 
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 exports.schema = new mongoose.Schema({
 	"username":{
