@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-exports.schema = new mongoose.Schema({
+var PostSchema = new mongoose.Schema({
  	"post_author": {
  		required: true,
  		type: Schema.Types.ObjectId,
@@ -63,3 +63,9 @@ exports.schema = new mongoose.Schema({
 		},
 	}
 });
+
+// Create an index on the title and description
+PostSchema.index({ title: 'text', description: 'text'}, {name: 'Post index', weights: {title: 5, description: 4}});
+
+// export the schema
+module.exports.schema = PostSchema;
