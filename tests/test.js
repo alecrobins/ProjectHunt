@@ -22,9 +22,3 @@ describe('String#split', function(){
   		});
 	});
 });
-
-describe('Get user profile data', function(){
-  it('should return alec robins profile', function(done){
-    request.get('')
-  })
-})
