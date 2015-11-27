@@ -12,6 +12,10 @@ exports.schema = new mongoose.Schema({
    	type: Schema.Types.ObjectId,
    	ref: 'User'
   	}],
+  	"like_count":{
+  		type: Number,
+  		default: 0
+  	},
 	"title": { 
 		required: true,
 		type: String,

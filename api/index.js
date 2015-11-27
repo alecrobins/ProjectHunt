@@ -32,9 +32,6 @@ module.exports = function(app, connection){
 	routes.passport(connection);
 
 	// FACEBOOK AUTH
-	app.get('/testAuth', isLoggedIn, function(req,res){
-		res.json({"test": "allGood"});
-	});
 	app.get('/auth/facebook', passport.authenticate('facebook'));
 	app.get('/auth/facebook/callback',
   		passport.authenticate('facebook', {
@@ -42,9 +39,16 @@ module.exports = function(app, connection){
          failureRedirect : '/login'
       }));
 
-   app.get('/logout', function(req, res) {
+   app.get('/logout', function(req, res, next) {
+
 		req.logout();
-		res.redirect('/login');
+		console.info('Logout USER: ' + req.session.userId);
+  		
+  		req.session.destroy(function(error) {
+    		if (error) next(error);
+			res.redirect('/');
+  		});
+
    });
 
 	//TEST CONNECTION
@@ -72,31 +76,28 @@ module.exports = function(app, connection){
 		req.db.User.find().exec(function (err, user) {
 		  if (err) return handleError(err);
 		  res.json(user);
-		});
-
-	});
+		});});
 
 	//MAIN
-	// app.get('/api/profile', isLoggedIn, db, routes.main.profile);
-	// app.del('/api/profile', isLoggedIn, db, routes.main.delProfile);
-	// app.post('/api/login', db, routes.main.login);
-	// app.post('/api/logout', routes.main.logout);
+	app.get('/api/profile', isLoggedIn, db, routes.main.profile);
+	app.delete('/api/profile', isLoggedIn, db, routes.main.delProfile);
 
-	// //POSTS
-	// app.get('/api/posts', isLoggedIn, db, routes.posts.getPosts);
-	// app.post('/api/posts', isLoggedIn, db, routes.posts.add);
-	// app.get('/api/posts/:id', isLoggedIn, db, routes.posts.getPost);
-	// app.put('/api/posts/:id', isLoggedIn, db, routes.posts.updatePost);
-	// app.del('/api/posts/:id', isLoggedIn, db, routes.posts.del);
+	// POSTS
+	app.get('/api/posts', isLoggedIn, db, routes.posts.getPosts);
+	app.post('/api/posts', isLoggedIn, db, routes.posts.add);
+	app.get('/api/posts/:id', isLoggedIn, db, routes.posts.getPost);
+	app.put('/api/posts/:id', isLoggedIn, db, routes.posts.updatePost);
+	app.delete('/api/posts/:id', isLoggedIn, db, routes.posts.delete);
 
-	// //USERS
-	// app.get('/api/users', isLoggedIn, db, routes.users.getUsers);
-	// app.get('/api/users/:id', isLoggedIn, db,routes.users.getUser);
-	// app.post('/api/users', isLoggedIn, db, routes.users.add);
-	// app.put('/api/users/:id', isLoggedIn, db, routes.users.update);
-	// app.del('/api/users/:id', isLoggedIn, db, routes.users.del);
+	// ACTIONS
+	app.post('/api/actions/like', isLoggedIn, db, routes.actions.like);
+
+	// USERS
+	app.get('/api/users/:id', isLoggedIn, db,routes.users.getUser);
+	app.put('/api/users/:id', isLoggedIn, db, routes.users.update);
+	app.delete('/api/users/:id', isLoggedIn, db, routes.users.delete);
 
 	// //SEARCH
-	// app.get('/api/search/:query', db, routes.search.getPosts);
+	app.get('/api/search/:query', db, routes.search.getPosts);
 
 };

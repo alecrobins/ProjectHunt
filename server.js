@@ -28,10 +28,10 @@ app.set('port', process.env.PORT || 3000  );
 app.use(cors(corsOptions));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
-// app.use(session({ secret: process.env.SESSIONSECRET }));
 app.use(cookieParser());
+// app.use(session({secret: process.env.SESSIONSECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 

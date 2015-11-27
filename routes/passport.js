@@ -7,16 +7,16 @@ module.exports = function(connection){
 
   // set up passport strategies
   passport.use(new FacebookStrategy({
-    clientID: config.facebook.clientID,
-    clientSecret: config.facebook.clientSecret,
-    callbackURL: config.facebook.callbackURL,
-    enableProof: false,
-    scope: ['email'],
-    profileFields: ['id', 'displayName', 'emails', 'picture']
+        clientID: config.facebook.clientID,
+        clientSecret: config.facebook.clientSecret,
+        callbackURL: config.facebook.callbackURL,
+        enableProof: false,
+        scope: ['email'],
+        profileFields: ['id', 'displayName', 'emails', 'picture']
     },
-      function(accessToken, refreshToken, profile, done) {
+    function(accessToken, refreshToken, profile, done) {
         // asynchronous
-          process.nextTick(function() {
+        process.nextTick(function() {
             var User = connection.model('User', models.User, 'users');
             // find the user in the database based on their facebook id
             User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
