@@ -31,7 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 app.use(cookieParser());
-// app.use(session({secret: process.env.SESSIONSECRET }));
+app.use(session({
+	secret: "ciPkVAopvS7t.H(9WsGuj^>!^&v5",//process.env.SESSIONSECRET,
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

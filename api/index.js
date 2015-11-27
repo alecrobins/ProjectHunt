@@ -31,6 +31,11 @@ module.exports = function(app, connection){
 	// set up passport with mongo connection
 	routes.passport(connection);
 
+	app.get('/test', function(req, res, next){
+		console.log(req);
+		res.json({"test": "test"});
+	});
+
 	// FACEBOOK AUTH
 	app.get('/auth/facebook', passport.authenticate('facebook'));
 	app.get('/auth/facebook/callback',
@@ -79,8 +84,8 @@ module.exports = function(app, connection){
 		});});
 
 	//MAIN
-	app.get('/api/profile', isLoggedIn, db, routes.main.profile);
-	app.delete('/api/profile', isLoggedIn, db, routes.main.delProfile);
+	app.get('/api/profile', passport.authenticate('facebook'), db, routes.main.profile);
+	app.delete('/api/profile', passport.authenticate('facebook'), db, routes.main.delProfile);
 
 	// POSTS
 	app.get('/api/posts', isLoggedIn, db, routes.posts.getPosts);
