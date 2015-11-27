@@ -5,9 +5,9 @@ var safeFields = 'name email photo_url occupation social';
 
 // GET '/api/users/:id'
 module.exports.getUser = function(req, res, next){
-	req.db.User.findOne({"id": req.params.id}, safeFields, function(err, user){
+	req.db.User.findOne({"_id": req.params.id}, safeFields, function(err, user){
 		if(err) next(err);
-		res.status(200).json(user);
+		res.json(user);
 	});
 }
 
@@ -21,7 +21,7 @@ module.exports.update = function(req, res, next){
 		req.db.User.update({ "id": req.session.user._id }, newUserFields,
 			function(err, obj){
 				if(err) next(err);
-				res.status(200).json(obj);
+				res.json(obj);
 			});
 
 	}else{
@@ -39,7 +39,7 @@ module.exports.delete = function(req, res, next){
 			},
 			function(err, obj){
 				if(err) next(err);
-				res.status(200).json(obj);
+				res.json(obj);
 			});
 	}else{
 		next(new Error('Wrong id'));

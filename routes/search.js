@@ -22,7 +22,7 @@ module.exports.getPosts = function(req, res, next){
     		})
     		.exec(function(err, results) {
         		if(err) next(err);
-        		res.status(200).json(results);
+        		res.json(results);
     		});
 	}else{
 		next(new Erorr('No query'));

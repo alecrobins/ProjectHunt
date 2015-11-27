@@ -2,21 +2,21 @@
 
 // GET '/api/posts'
 module.exports.getPosts = function (req, res, next) {
-	var page = req.query.page;
-	var limit = req.query.limit;
+	// var page = req.query.page;
+	// var limit = req.query.limit;
 	
 	// return most recent posts 
 	req.db.Post.find({},
 		{
-			"skip": (page - 1) * limit,
-			"limit": limit,
-			"sort": {
-				"created_at": -1
-			}
+			// "skip": (page - 1) * limit,
+			// "limit": limit,
+			// "sort": {
+			// 	"created_at": -1
+			// }
 		},
 		function(err, results) {
 			if(err) next(err);
-			res.status(200).json(results);
+			res.json(results);
 		});
 }
 
@@ -25,21 +25,22 @@ module.exports.add = function (req, res, next) {
 	if (req.body) {
 		// create a new post
 		req.db.Post.create({
-			"post_author": req.session.user._id,
+			"post_author": req.session.passport.user._id,
 			"title": req.body.title,
 			"description": req.body.description,
 			"talent_needed": req.body.talent_needed || null,
 			"feature_img": req.body.feature_img || null,
 			"imgs": req.body.imgs || null,
-			"contact": {
-				"email": req.body.contact.email || null,
-				"phone": req.body.contact.phone || null,
-				"github": req.body.contact.github || null,
-				"website": req.body.contact.website || null
-			}
+			"contact": req.body.contact != null ?
+				{
+					"email": req.body.contact.email || null,
+					"phone": req.body.contact.phone || null,
+					"github": req.body.contact.github || null,
+					"website": req.body.contact.website || null
+				} : null
 		}, function(err, result){
 			if (err) next(err);
-	      res.status(200).json(result);
+	      res.json(result);
 		});
 	}else{
 		next(new Error('No data'));
@@ -51,7 +52,7 @@ module.exports.getPost = function (req, res, next) {
 	if (req.params.id) {
    	req.db.Post.findOne({"id": req.params.id}, function(err, post) {
 			if (err) return next(err);
-			res.status(200).json(post);
+			res.json(post);
 		});
 	}else{
 		next(new Error('No query'));
@@ -81,7 +82,7 @@ module.exports.updatePost = function (req, res, next) {
 		},
 		function(err, obj){
 			if(err) next(err);
-			res.status(200).json(obj);
+			res.json(obj);
 		});
 	}else{
 		next(new Error('No data'));
@@ -98,7 +99,7 @@ module.exports.delete = function (req, res, next) {
 			},
 			function(err, obj){
 				if(err) next(err);
-				res.status(200).json(obj);
+				res.json(obj);
 			});
 	}else{
 		next(new Error('No post id'));

@@ -25,6 +25,7 @@
     "passport-google-oauth": "^0.2.0",
     "passport-twitter": "^1.0.3",
     "superagent": "^1.4.0",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "zombie": "^4.0.8"
   }
 }

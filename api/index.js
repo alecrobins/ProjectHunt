@@ -25,16 +25,11 @@ module.exports = function(app, connection){
       
     	// if user isn't authenticated redirect to the login page
    	// res.redirect('/login');
-   	res.send(404);
+   	res.sendStatus(404);
 	}
 
 	// set up passport with mongo connection
 	routes.passport(connection);
-
-	app.get('/test', function(req, res, next){
-		console.log(req);
-		res.json({"test": "test"});
-	});
 
 	// FACEBOOK AUTH
 	app.get('/auth/facebook', passport.authenticate('facebook'));
@@ -52,9 +47,35 @@ module.exports = function(app, connection){
   		req.session.destroy(function(error) {
     		if (error) next(error);
 			res.redirect('/');
-  		});
+  		});});
 
-   });
+	//MAIN
+	app.get('/api/profile', passport.authenticate('facebook'), db, routes.main.profile);
+	app.delete('/api/profile', passport.authenticate('facebook'), db, routes.main.delProfile);
+
+	// POSTS
+	app.get('/api/posts', db, routes.posts.getPosts);
+	app.post('/api/posts', isLoggedIn, db, routes.posts.add);
+	app.get('/api/posts/:id', isLoggedIn, db, routes.posts.getPost);
+	app.put('/api/posts/:id', isLoggedIn, db, routes.posts.updatePost);
+	app.delete('/api/posts/:id', isLoggedIn, db, routes.posts.delete);
+
+	// TALENT
+	//TODO: need to add routes:
+		// - add new talent
+		// - delete talent
+		// - search posts that contain talents
+
+	// ACTIONS
+	app.post('/api/actions/like', isLoggedIn, db, routes.actions.like);
+
+	// USERS
+	app.get('/api/users/:id', isLoggedIn, db,routes.users.getUser);
+	app.put('/api/users/:id', isLoggedIn, db, routes.users.update);
+	app.delete('/api/users/:id', isLoggedIn, db, routes.users.delete);
+
+	// //SEARCH
+	app.get('/api/search/:query', db, routes.search.getPosts);
 
 	//TEST CONNECTION
 	app.post('/api/test', db, function(req, res, next){
@@ -82,27 +103,5 @@ module.exports = function(app, connection){
 		  if (err) return handleError(err);
 		  res.json(user);
 		});});
-
-	//MAIN
-	app.get('/api/profile', passport.authenticate('facebook'), db, routes.main.profile);
-	app.delete('/api/profile', passport.authenticate('facebook'), db, routes.main.delProfile);
-
-	// POSTS
-	app.get('/api/posts', isLoggedIn, db, routes.posts.getPosts);
-	app.post('/api/posts', isLoggedIn, db, routes.posts.add);
-	app.get('/api/posts/:id', isLoggedIn, db, routes.posts.getPost);
-	app.put('/api/posts/:id', isLoggedIn, db, routes.posts.updatePost);
-	app.delete('/api/posts/:id', isLoggedIn, db, routes.posts.delete);
-
-	// ACTIONS
-	app.post('/api/actions/like', isLoggedIn, db, routes.actions.like);
-
-	// USERS
-	app.get('/api/users/:id', isLoggedIn, db,routes.users.getUser);
-	app.put('/api/users/:id', isLoggedIn, db, routes.users.update);
-	app.delete('/api/users/:id', isLoggedIn, db, routes.users.delete);
-
-	// //SEARCH
-	app.get('/api/search/:query', db, routes.search.getPosts);
 
 };

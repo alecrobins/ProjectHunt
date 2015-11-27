@@ -5,7 +5,7 @@ module.exports.profile = function(req, res, next){
 	req.db.User.findOne({ "id": req.session.user._id }, function(err, user) {
 		console.log('err', err)
 		if (err) return next(err);
-		res.status(200).json(user);
+		res.json(user);
   	});  	
 }
 
@@ -19,6 +19,6 @@ module.exports.delProfile = function(req, res, next){
       	if (err) next(err)
     	});
 
-		res.status(200).json(obj);
+		res.json(obj);
 	})
 }

@@ -8,15 +8,15 @@ module.exports.like = function(req, res, next){
 		req.db.Post.findOneAndUpdate(
 			{
 				"id": req.body.post,
-				"likes": {$ne: req.session.user._id}
+				"likes": {$ne: req.session.passport.user._id}
 			},
 			{
 				$inc: {"like_count": 1},
-				$push: {"likes": req.session.user._id}
+				$push: {"likes": req.session.passport.user._id}
 			},
 			function(err, obj){
 				if(err) next(err);
-				res.status(200).json(obj);
+				res.json(obj);
 			})
 	}else{
 		next(new Error('No post id'));

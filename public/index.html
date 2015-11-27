@@ -2,10 +2,36 @@
 <html>
 <head>
 	<title>Project Hunt</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
 
 <h1>Project Hunt</h1>
+
+<!-- "post_author": req.session.user._id,
+			"title": req.body.title,
+			"description": req.body.description,
+			"talent_needed": req.body.talent_needed || null,
+			"feature_img": req.body.feature_img || null,
+			"imgs": req.body.imgs || null,
+			"contact": {
+				"email": req.body.contact.email || null,
+				"phone": req.body.contact.phone || null,
+				"github": req.body.contact.github || null,
+				"website": req.body.contact.website || null
+			} -->
+
+<a href="/auth/facebook"> Log into facebook </a>
+
+<form action="/api/posts" method="POST">
+  Title: <input type="text" name="title"><br>
+  Description <input type="text" name="description"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<script type="text/javascript">
+	
+</script>
 
 </body>
 </html>
