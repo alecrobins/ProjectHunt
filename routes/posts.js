@@ -4,16 +4,16 @@
 module.exports.getPosts = function (req, res, next) {
 	// var page = req.query.page;
 	// var limit = req.query.limit;
-	
-	// return most recent posts 
-	req.db.Post.find({},
+
+	req.db.Post.paginate({},
 		{
-			// "skip": (page - 1) * limit,
-			// "limit": limit,
-			// "sort": {
-			// 	"created_at": -1
-			// }
-		},
+	   	page: 1, // TODO: generate from params
+	   	limit: 10, // TODO: generate from params
+	   	sortBy: {
+	      	created_at: -1
+	    	},
+	    	// lean: true
+	  	},
 		function(err, results) {
 			if(err) next(err);
 			res.json(results);

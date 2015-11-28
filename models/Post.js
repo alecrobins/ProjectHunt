@@ -1,5 +1,6 @@
 // Post Monogo Schemea 
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 var Schema = mongoose.Schema;
 
 var PostSchema = new mongoose.Schema({
@@ -66,6 +67,7 @@ var PostSchema = new mongoose.Schema({
 
 // Create an index on the title and description
 PostSchema.index({ title: 'text', description: 'text'}, {name: 'Post index', weights: {title: 5, description: 4}});
+PostSchema.plugin(mongoosePaginate);
 
 // export the schema
 module.exports.schema = PostSchema;
