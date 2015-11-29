@@ -2,7 +2,7 @@
 
 // GET '/api/profile'
 module.exports.profile = function(req, res, next){
-	req.db.User.findOne({ "id": req.session.user._id }, function(err, user) {
+	req.db.User.findOne({ "_id": req.session.passport.user._id }, function(err, user) {
 		console.log('err', err)
 		if (err) return next(err);
 		res.json(user);

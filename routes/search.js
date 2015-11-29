@@ -8,11 +8,12 @@ module.exports.getPosts = function(req, res, next){
 	if(req.params.query != ""){
 		// return the post that has the highest text score match
 		// most recent post with the highest likes
+		console.log(req.params.query);
 		req.db.Post
 			.find({
 				$text: { $search : req.params.query }, 
-        		skip: (page - 1) * limit,
-        		limit: limit,
+        		// skip: (page - 1) * limit,
+        		// limit: limit,
         		sort: {
         			score: { $meta: "textScore" },
         			like_count: -1,

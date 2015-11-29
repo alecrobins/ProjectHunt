@@ -7,7 +7,7 @@ module.exports.like = function(req, res, next){
 		// increment like count and add user to the list of liked user
 		req.db.Post.findOneAndUpdate(
 			{
-				"id": req.body.post,
+				"_id": req.body.id,
 				"likes": {$ne: req.session.passport.user._id}
 			},
 			{

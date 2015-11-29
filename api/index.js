@@ -72,6 +72,7 @@ module.exports = function(app, connection){
 	app.get('/api/posts/:id', isLoggedIn, db, routes.posts.getPost);
 	app.put('/api/posts/:id', isLoggedIn, db, routes.posts.updatePost);
 	app.delete('/api/posts/:id', isLoggedIn, db, routes.posts.delete);
+	// TODO: add a route for uploading images or videos
 
 	// TALENT
 	//TODO: need to add routes:
@@ -83,6 +84,7 @@ module.exports = function(app, connection){
 	app.post('/api/actions/like', isLoggedIn, db, routes.actions.like);
 
 	// USERS
+	app.get('/api/user', isLoggedIn, db, routes.users.getCurrentUser);
 	app.get('/api/users/:id', isLoggedIn, db,routes.users.getUser);
 	app.put('/api/users/:id', isLoggedIn, db, routes.users.update);
 	app.delete('/api/users/:id', isLoggedIn, db, routes.users.delete);

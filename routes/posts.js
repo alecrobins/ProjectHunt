@@ -64,7 +64,7 @@ module.exports.updatePost = function (req, res, next) {
 		req.db.Post.update(
 		{
 			"id": req.body.id,
-			"post_author": req.session.user._id
+			"post_author": req.session.passport.user._id
 		},
 		{
 			"title": req.body.title,
@@ -94,7 +94,7 @@ module.exports.delete = function (req, res, next) {
 		req.db.Post.remove(
 			{
 				"id": req.params.id,
-				"post_author": req.session.user._id
+				"post_author": req.session.passport.user._id
 			},
 			function(err, obj){
 				if(err) next(err);
