@@ -90,31 +90,4 @@ module.exports = function(app, connection){
 	// //SEARCH
 	app.get('/api/search/:query', db, routes.search.getPosts);
 
-	//TEST CONNECTION
-	app.post('/api/test', db, function(req, res, next){
-		
-		var user = new req.db.User({
-			"username": "newUser",
-			"first_name": "Test",
-			"last_name": "User",
-			"email": "test@example.com",
-			"password": "test",
-			"occupation": "Backend End Developer",
-			"social": {
-				"github": "github.com/testUser",
-				"website": "testUser.me",
-			}
-		});
-		
-		user.save(function(err) {
-		   if (err) next(err);
-		   res.json(user);
-		});});
-	app.get('/api/test', db, function(req, res, next){
-
-		req.db.User.find().exec(function (err, user) {
-		  if (err) return handleError(err);
-		  res.json(user);
-		});});
-
 };
