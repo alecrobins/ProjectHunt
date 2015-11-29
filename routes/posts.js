@@ -13,8 +13,7 @@ module.exports.getPosts = function (req, res, next) {
 	      	created_at: -1
 	    	},
 	    	// lean: true
-	  	},
-		function(err, results) {
+	  	}, function(err, results) {
 			if(err) next(err);
 			res.json(results);
 		});

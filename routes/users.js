@@ -16,7 +16,7 @@ module.exports.update = function(req, res, next){
 	if(req.body && req.session.user._id == req.params.id){
 
 		var newUserFields = req.body;
-		newUserFields.created_at = Date.now();
+		newUserFields.updated_at = Date.now();
 
 		req.db.User.update({ "id": req.session.user._id }, newUserFields,
 			function(err, obj){

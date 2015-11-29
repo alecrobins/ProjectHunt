@@ -8,24 +8,26 @@
 
 <h1>Project Hunt</h1>
 
-<!-- "post_author": req.session.user._id,
-			"title": req.body.title,
-			"description": req.body.description,
-			"talent_needed": req.body.talent_needed || null,
-			"feature_img": req.body.feature_img || null,
-			"imgs": req.body.imgs || null,
-			"contact": {
-				"email": req.body.contact.email || null,
-				"phone": req.body.contact.phone || null,
-				"github": req.body.contact.github || null,
-				"website": req.body.contact.website || null
-			} -->
-
 <a href="/auth/facebook"> Log into facebook </a>
 
+<h1>POST</h1>
 <form action="/api/posts" method="POST">
   Title: <input type="text" name="title"><br>
   Description <input type="text" name="description"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<h2>SIGN UP</h2>
+<form action="/api/local-signup" method="POST">
+  EMAIL: <input type="text" name="email"><br>
+  PASSWORD <input type="password" name="password"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<h2>SIGN IN</h2>
+<form action="/api/local-login" method="POST">
+  EMAIL: <input type="text" name="email"><br>
+  PASSWORD: <input type="password" name="password"><br>
   <input type="submit" value="Submit">
 </form>
 
