@@ -10,13 +10,18 @@ var express = require('express'),
 	routes = require('./routes'),
 	cookieParser = require('cookie-parser'),
 	cors = require('cors'),
-	api = require('./api');
+	api = require('./api'),
 	http = require('http'),
 	methodOverride = require('method-override'),
 	session = require('express-session'),
 	util = require('util'),
 	passport = require('passport'),
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+  swig  = require('swig'),
+  React = require('react'),
+  ReactDOM = require('react-dom/server'), // React.renderToString now lives here
+  Router = require('react-router');
+  // reactRoutes = require('./app/routes');
 
 var corsOptions = {
   origin: process.env.PORT || 'http://localhost:3000'

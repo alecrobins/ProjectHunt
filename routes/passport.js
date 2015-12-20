@@ -17,36 +17,34 @@ module.exports = function(connection){
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
-            process.nextTick(function() {
-                var User = connection.model('User', models.User, 'users');
-                // find the user in the database based on their facebook id
-                User.findOne({ 'email': email }, function(err, user) {
+            var User = connection.model('User', models.User, 'users');
+            // find the user in the database based on their facebook id
+            User.findOne({ 'email': email }, function(err, user) {
 
-                    if (err) return done(err);
+                if (err) return done(err);
 
-                    // if the user is found, then log them in
-                    if (user) {
-                        return done(null, user); // user found, return that user
-                    } else {
-                        
-                        // create a new user if not set
-                        var newUser = new User();
-                        console.log(email);
-                        newUser.email = email;
-                        newUser.name = "No name";
-                        newUser.password = newUser.generateHash(password)
+                // if the user is found, then log them in
+                if (user) {
+                    return done(null, user); // user found, return that user
+                } else {
+                    
+                    // create a new user if not set
+                    var newUser = new User();
+                    console.log(email);
+                    newUser.email = email;
+                    newUser.name = "No name";
+                    newUser.password = newUser.generateHash(password)
 
-                        console.log(newUser);
+                    console.log(newUser);
 
-                        // save our user to the database
-                        newUser.save(function(err) {
-                            if (err) throw err;
-                            // if successful, return the new user
-                            return done(null, newUser);
-                        });
-                    }
+                    // save our user to the database
+                    newUser.save(function(err) {
+                        if (err) throw err;
+                        // if successful, return the new user
+                        return done(null, newUser);
+                    });
+                }
 
-                });
             });
         });
     }));

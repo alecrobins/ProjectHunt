@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Project Hunt</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+<h1>Project Hunt</h1>
+
+<a href="/auth/facebook"> Log into facebook </a>
+
+<h1>POST</h1>
+<form action="/api/posts" method="POST">
+  Title: <input type="text" name="title"><br>
+  Description <input type="text" name="description"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<h1>LIKE POST</h1>
+<form action="/api/actions/like" method="POST">
+  POST ID: <input type="text" name="id"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<h2>SIGN UP</h2>
+<form action="/api/local-signup" method="POST">
+  EMAIL: <input type="text" name="email"><br>
+  PASSWORD <input type="password" name="password"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<h2>SIGN IN</h2>
+<form action="/api/local-login" method="POST">
+  EMAIL: <input type="text" name="email"><br>
+  PASSWORD: <input type="password" name="password"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<script type="text/javascript">
+	
+</script>
+
+</body>
+</html>
