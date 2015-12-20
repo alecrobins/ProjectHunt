@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { routeReducer } from 'redux-simple-router'
 
 let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
@@ -33,7 +34,8 @@ const reducer_2 = (state = {}, action) => {
 
 const reducer = combineReducers({
     messages: reducer_1,
-    pizzas: reducer_2
+    pizzas: reducer_2,
+    routing: routeReducer // keep track of routing
 })
 
 const store = createStoreWithMiddleware(reducer);

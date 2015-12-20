@@ -1,23 +1,37 @@
-var React = require('react');
-import Store from '../store/Store';
-import {saySomething, asyncSayActionCreator_1} from '../actions/testActions'
+import React from 'react';
+import { connect } from 'react-redux';
+import {saySomething, asyncSayActionCreator_1} from '../actions/testActions';
 
-var Home = React.createClass({
+
+@connect((state) => {
+    return {
+    	messages: state.messages,
+    	pizzas: state.pizzas,
+    	routing: state.routing
+    }
+})
+
+class Home extends React.Component {
 	
-	componentWillMount: function(){
-		Store.dispatch(saySomething("Hello World"));
-		Store.dispatch(asyncSayActionCreator_1("New Message"));
-	},
+	componentWillMount(){
+		this.props.dispatch(saySomething("Hello World"));
+		this.props.dispatch(asyncSayActionCreator_1("New Message"));
+	}
 
-	render: function() {
-		console.log(Store.getState());
+	render() {
+
+		console.log("RENDERED");
+		console.log(this.props);
+
+		const test = this.props.messages.message === "New Message" ?
+			<h1>NEW MESSAGE</h1> : <h1>Not New :(</h1>;
 
 		return (
-			<h2 className="testClassName">
-				Home Expot
-			</h2>
+			<div className="testClassName">
+				{test}
+			</div>
 		);
 	}
-});
+};
 
-module.exports = Home;
+export default Home;
