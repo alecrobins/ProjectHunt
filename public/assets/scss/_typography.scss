@@ -1,0 +1,41 @@
+.h1,
+.h2,
+.h3 {
+	font-weight: 700;
+}
+
+.h4,
+.h5 {
+	font-weight: 500;
+}
+
+.h1 {
+	font-size: 36px;
+	cursor: pointer;
+	letter-spacing: -1px;
+}
+
+.h3__blue {
+	font-size: 22px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.h5 {
+	font-size:  14px;
+}
+
+.h5__green{
+}
+
+.h5__red{
+}
+
+.p__detail{
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.p__inline{
+	display: inline-block;
+}

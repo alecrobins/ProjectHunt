@@ -1,0 +1,22 @@
+* { 
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	font-family: 'Open sans', san serif;
+}
+
+html, html a{
+	-webkit-font-smoothing: antialiased !important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+body {
+	background: $background-grey;
+	font-family: 'Roboto', sans-serif;
+}
+
+.-clear:after {
+	content: "";
+	clear: both;
+}

@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
 	entry: './public/app/App.js',
 	output: {
@@ -15,7 +17,8 @@ module.exports = {
 		},
 		{
 				test: /\.scss$/,
-				loaders: ["style", "css", "sass"]
+				// loaders: ["style", "css", "sass"]
+				loader: "style-loader!css!sass?includePaths[]=" + path.resolve(__dirname, "./node_modules/compass-mixins/lib")
 		}]
 	},
 	sassLoader: {

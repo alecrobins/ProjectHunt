@@ -23,6 +23,7 @@
     "backbone.marionette": "^2.4.4",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
+    "compass-mixins": "^0.12.7",
     "cookie-parser": "^1.4.0",
     "cors": "^2.7.1",
     "expect.js": "^0.3.1",

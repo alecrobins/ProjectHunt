@@ -1,0 +1,54 @@
+/**
+*
+* Fixed width / heights
+*
+**/
+
+$maxPageWidth: 960px;
+$headerHeight: 120px;
+
+/**
+*
+* Break points
+*
+**/
+
+$desktop: 1024px;
+$tablet: 760px;
+$mobile: 460px;
+
+/**
+*
+* Colors
+*
+**/
+
+$main-grey: rgb(37,37,37);
+$secondary-grey: rgb(82,82,82);
+
+$project-green: rgb(2,237,218);
+$background-grey: rgb(242,242,242);
+
+$ui-designer: rgb(185,8,230);
+$ux-designer: rgb(230,8,154);
+$web-dev: rgb(8,230,45);
+
+/**
+*
+* Z-layers
+*
+**/
+
+$z_layer_base: 0;
+$z_layer0: 1;
+$z_layer1: 10;
+$z_layer2: 20;
+$z_layer3: 30;
+$z_layer4: 40;
+$z_layer5: 50;
+$z_layer6: 60;
+$z_layer7: 70;
+$z_layer8: 80;
+$z_layer9: 90;
+$z_layer10: 100;
+$z_layer_hidden: -1;
