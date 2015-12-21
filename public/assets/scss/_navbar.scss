@@ -1,5 +1,32 @@
 .nav-container{
-	@include display-flex;
-	@include justify-content(center);
-	@include align-items(center);
+	display: block;
+	position: relative;
+	background: $project-green;
+	padding: $default-padding;
+	max-width: $max-page-width;
+	margin: 0 auto;
+
+	&--login{
+		float: right;
+	}
+
+	&--searchbar{
+		display: block;
+		position: absolute;
+		width: 40%;
+		left: 30%;
+	}
+}
+
+.nav-logo {
+	float: left;
+	max-width: 140px;
+}
+
+h3.nav-container--login {
+	color: white;
+	text-transform: uppercase;;
+	font-size: 14px;
+	font-weight: 900;
+	letter-spacing: 3px;
 }

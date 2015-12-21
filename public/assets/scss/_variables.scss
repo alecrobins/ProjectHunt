@@ -4,7 +4,7 @@
 *
 **/
 
-$maxPageWidth: 960px;
+$max-page-width: 960px;
 $headerHeight: 120px;
 
 /**
@@ -32,6 +32,12 @@ $background-grey: rgb(242,242,242);
 $ui-designer: rgb(185,8,230);
 $ux-designer: rgb(230,8,154);
 $web-dev: rgb(8,230,45);
+
+/**
+ * Spacing
+ */
+$default-padding: 20px;
+$default-margin: 20px;
 
 /**
 *

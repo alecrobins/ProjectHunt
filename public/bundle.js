@@ -125,7 +125,7 @@
 
 
 	// module
-	exports.push([module.id, "html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font:inherit;font-size:100%;vertical-align:baseline}html{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}q,blockquote{quotes:none}q:before,q:after,blockquote:before,blockquote:after{content:\"\";content:none}a img{border:none}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}*{margin:0;padding:0;border:none;outline:none;font-family:'Open sans', san serif}html,html a{-webkit-font-smoothing:antialiased !important;text-shadow:1px 1px 1px rgba(0,0,0,0.004)}body{background:#f2f2f2;font-family:'Roboto', sans-serif}.-clear:after{content:\"\";clear:both}.h1,.h2,.h3{font-weight:700}.h4,.h5{font-weight:500}.h1{font-size:36px;cursor:pointer;letter-spacing:-1px}.h3__blue{font-size:22px;font-weight:700;text-transform:uppercase}.h5{font-size:14px}.p__detail{font-size:12px;line-height:16px}.p__inline{display:inline-block}.nav-container{display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;-webkit-align-items:center;align-items:center}\n", ""]);
+	exports.push([module.id, "html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font:inherit;font-size:100%;vertical-align:baseline}html{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}q,blockquote{quotes:none}q:before,q:after,blockquote:before,blockquote:after{content:\"\";content:none}a img{border:none}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}*{margin:0;padding:0;border:none;outline:none;font-family:'Open sans', san serif}html,html a{-webkit-font-smoothing:antialiased !important;text-shadow:1px 1px 1px rgba(0,0,0,0.004)}body{background:#f2f2f2;font-family:'Roboto', sans-serif}.-clear:after{content:\"\";display:block;clear:both}.h1,.h2,.h3{font-weight:700}.h4,.h5{font-weight:500}.h1{font-size:36px;cursor:pointer;letter-spacing:-1px}.h3__blue{font-size:22px;font-weight:700;text-transform:uppercase}.h5{font-size:14px}.p__detail{font-size:12px;line-height:16px}.p__inline{display:inline-block}.nav-container{display:block;position:relative;background:#02edda;padding:20px;max-width:960px;margin:0 auto}.nav-container--login{float:right}.nav-container--searchbar{display:block;position:absolute;width:40%;left:30%}.nav-logo{float:left;max-width:140px}h3.nav-container--login{color:white;text-transform:uppercase;font-size:14px;font-weight:900;letter-spacing:3px}.post-list--container{width:760px;margin:0 auto}.post--container{margin:40px 0}\n", ""]);
 
 	// exports
 
@@ -27355,10 +27355,14 @@
 	exports.default = function () {
 		return _react2.default.createElement(
 			'div',
-			{ className: 'nav-container' },
+			{ className: 'nav-container -clear' },
 			_react2.default.createElement('img', { src: 'assets/imgs/logo.png', alt: 'Project Hunt Logo', className: 'nav-logo' }),
 			_react2.default.createElement(_SearchBar2.default, null),
-			_react2.default.createElement('i', { className: 'fa fa-pencil-square-o' })
+			_react2.default.createElement(
+				'h3',
+				{ className: 'nav-container--login' },
+				'Login'
+			)
 		);
 	};
 
@@ -27379,7 +27383,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function () {
-		return _react2.default.createElement("input", { type: "text", placeholder: "search all the posts" });
+		return _react2.default.createElement("input", { type: "text", placeholder: "search all the posts", className: "nav-container--searchbar -clear" });
 	};
 
 /***/ },
@@ -27869,7 +27873,7 @@
 /* 264 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -27889,10 +27893,18 @@
 		switch (action.type) {
 			case 'GET_POSTS':
 				console.log("GOT POST@!");
-				console.log(action.res.data);
+				console.log(action.res);
 				return _extends({}, state, {
 					postData: [].concat(_toConsumableArray(action.res.data))
 				});
+			case 'GET_POSTS_REQUEST':
+				console.log("GET_POSTS_REQUEST");
+				console.log(action);
+				return state;
+			case 'GET_POSTS_FAILURE':
+				console.log("~~~GET_POSTS_FAILURE");
+				console.log(action);
+				return state;
 			default:
 				return state;
 		}
