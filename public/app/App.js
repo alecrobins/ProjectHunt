@@ -1,3 +1,4 @@
+import '../assets/scss/screen.scss'; // includes the main scss file
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { Router } from 'react-router';
