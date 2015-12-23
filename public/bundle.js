@@ -27461,6 +27461,10 @@
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _dec, _class;
+
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
@@ -27469,41 +27473,66 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(216);
+
+	var _uiActions = __webpack_require__(278);
+
+	var uiActions = _interopRequireWildcard(_uiActions);
+
 	var _SearchBar = __webpack_require__(257);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
+	var _NavBarUser = __webpack_require__(280);
+
+	var _NavBarUser2 = _interopRequireDefault(_NavBarUser);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function () {
-		return _react2.default.createElement(
-			'div',
-			{ className: 'nav-container -clear' },
-			_react2.default.createElement('img', { src: 'assets/imgs/logo.png', alt: 'Project Hunt Logo', className: 'nav-logo' }),
-			_react2.default.createElement(_SearchBar2.default, null),
-			_react2.default.createElement(
-				'h3',
-				{ className: 'nav-container--login' },
-				_react2.default.createElement(
-					'a',
-					{ href: '/auth/twitter' },
-					'Login in with Twitter'
-				),
-				_react2.default.createElement('br', null),
-				_react2.default.createElement(
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NavBar = (_dec = (0, _reactRedux.connect)(function (state) {
+		return {
+			user: state.user
+		};
+	}), _dec(_class = (function (_React$Component) {
+		_inherits(NavBar, _React$Component);
+
+		function NavBar() {
+			_classCallCheck(this, NavBar);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(NavBar).apply(this, arguments));
+		}
+
+		_createClass(NavBar, [{
+			key: 'render',
+			value: function render() {
+				// <button onClick={() => this.props.dispatch(uiActions.loginClicked())}>
+				var logIn = this.props.user.is_logged_in ? _react2.default.createElement(_NavBarUser2.default, this.props.user) : _react2.default.createElement(
 					'a',
 					{ href: '/auth/facebook' },
-					'Login in with Facebook'
-				),
-				_react2.default.createElement('br', null),
-				_react2.default.createElement(
-					'a',
-					{ href: '/api/logout' },
-					'Logout'
-				)
-			)
-		);
-	};
+					'SIGN IN'
+				);
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'nav-container -clear' },
+					_react2.default.createElement('img', { src: 'assets/imgs/logo.png', alt: 'Project Hunt Logo', className: 'nav-logo' }),
+					_react2.default.createElement(_SearchBar2.default, null),
+					logIn
+				);
+			}
+		}]);
+
+		return NavBar;
+	})(_react2.default.Component)) || _class);
+	exports.default = NavBar;
 
 /***/ },
 /* 257 */
@@ -28692,8 +28721,6 @@
 
 		switch (action.type) {
 			case types.GET_USER:
-				console.log("GOT USER@!");
-				console.log(action.res.data);
 				return _extends({}, state, {
 					userData: _extends({}, action.res.data),
 					is_logged_in: true
@@ -28707,6 +28734,115 @@
 				return state;
 		}
 	}
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.loginClicked = loginClicked;
+
+	var _axios = __webpack_require__(235);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _config = __webpack_require__(252);
+
+	var _uiConstants = __webpack_require__(279);
+
+	var types = _interopRequireWildcard(_uiConstants);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function loginClicked() {
+	  return {
+	    type: types.LOGIN_CLICKED
+	  };
+	}
+
+/***/ },
+/* 279 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var LOGIN_CLICKED = exports.LOGIN_CLICKED = 'LOGIN_CLICKED';
+	var LOGIN_WINDOW_CLOSED = exports.LOGIN_WINDOW_CLOSED = 'LOGIN_WINDOW_CLOSED';
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(5);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _uiActions = __webpack_require__(278);
+
+	var uiActions = _interopRequireWildcard(_uiActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NavBarUser = (function (_React$Component) {
+		_inherits(NavBarUser, _React$Component);
+
+		function NavBarUser() {
+			_classCallCheck(this, NavBarUser);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(NavBarUser).apply(this, arguments));
+		}
+
+		_createClass(NavBarUser, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'h3',
+						null,
+						' Nav bar user '
+					),
+					_react2.default.createElement('img', { src: this.props.userData.photo_url, alt: 'Profile picture' }),
+					this.props.userData.name,
+					_react2.default.createElement(
+						'a',
+						{ href: '/api/logout' },
+						'Log Out'
+					)
+				);
+			}
+		}]);
+
+		return NavBarUser;
+	})(_react2.default.Component);
+
+	exports.default = NavBarUser;
 
 /***/ }
 /******/ ]);

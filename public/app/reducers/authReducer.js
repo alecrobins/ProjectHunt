@@ -7,8 +7,6 @@ export default function authedReducer(
 	} , action) {
 	switch (action.type) {
 		case types.GET_USER:
-			console.log("GOT USER@!");
-			console.log(action.res.data);
 			return {
 				...state,
 				userData: {...action.res.data},

@@ -1,18 +1,32 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import * as uiActions from '../actions/uiActions'
 import SearchBar from './SearchBar'
+import NavBarUser from './NavBarUser'
 
-export default () => {
-	return (
-		<div className="nav-container -clear">
-			<img src="assets/imgs/logo.png" alt="Project Hunt Logo" className="nav-logo" />
-			<SearchBar />
-			<h3 className="nav-container--login">
-				<a href="/auth/twitter">Login in with Twitter</a>
-				<br />
-				<a href="/auth/facebook">Login in with Facebook</a>
-				<br />
-				<a href="/api/logout">Logout</a>
-			</h3>
-		</div>
-	)
+@connect((state) => {
+    return {
+    	user: state.user
+    }
+})
+
+class NavBar extends React.Component {
+
+	render(){
+		// <button onClick={() => this.props.dispatch(uiActions.loginClicked())}>
+		const logIn = this.props.user.is_logged_in ?
+			<NavBarUser {...this.props.user} /> :
+			<a href="/auth/facebook">SIGN IN</a>
+
+		return (
+			<div className="nav-container -clear">
+				<img src="assets/imgs/logo.png" alt="Project Hunt Logo" className="nav-logo" />
+				<SearchBar />
+				{logIn}
+			</div>
+		)	
+	}
+
 }
+
+export default NavBar;

@@ -21,7 +21,7 @@ module.exports = function(app, connection) {
 		// if user is authenticated in the session, carry on
 		if (req.isAuthenticated()) return next();
 
-		res.sendStatus(404);
+		res.sendStatus(401);
 	}
 
 	// set up passport with mongo connection
