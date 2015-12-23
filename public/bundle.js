@@ -64,13 +64,13 @@
 
 	var _reactRedux = __webpack_require__(216);
 
-	var _Store = __webpack_require__(257);
+	var _store = __webpack_require__(259);
 
-	var _Store2 = _interopRequireDefault(_Store);
+	var _store2 = _interopRequireDefault(_store);
 
-	var _history = __webpack_require__(266);
+	var _history = __webpack_require__(269);
 
-	var _reduxSimpleRouter = __webpack_require__(259);
+	var _reduxSimpleRouter = __webpack_require__(262);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -78,14 +78,14 @@
 
 	var history = (0, _history.createHistory)();
 
-	(0, _reduxSimpleRouter.syncReduxAndRouter)(history, _Store2.default);
+	(0, _reduxSimpleRouter.syncReduxAndRouter)(history, _store2.default);
 
 	_reactDom2.default.render(_react2.default.createElement(
 		_reactRedux.Provider,
-		{ store: _Store2.default },
+		{ store: _store2.default },
 		_react2.default.createElement(
 			_reactRouter.Router,
-			{ history: history },
+			{ history: history, store: _store2.default },
 			_routes2.default
 		)
 	), document.getElementById('app'));
@@ -24853,9 +24853,17 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Main = __webpack_require__(254);
+	var _Main = __webpack_require__(255);
 
 	var _Main2 = _interopRequireDefault(_Main);
+
+	var _Profile = __webpack_require__(274);
+
+	var _Profile2 = _interopRequireDefault(_Profile);
+
+	var _ProfileEdit = __webpack_require__(275);
+
+	var _ProfileEdit2 = _interopRequireDefault(_ProfileEdit);
 
 	var _reactRouter = __webpack_require__(163);
 
@@ -24864,6 +24872,8 @@
 	exports.default = _react2.default.createElement(
 		_reactRouter.Route,
 		{ path: '/', component: _Main2.default },
+		_react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
+		_react2.default.createElement(_reactRouter.Route, { path: 'profile/edit', component: _ProfileEdit2.default }),
 		_react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
 	);
 
@@ -24889,11 +24899,13 @@
 
 	var _reactRedux = __webpack_require__(216);
 
+	var _reduxSimpleRouter = __webpack_require__(262);
+
 	var _postActions = __webpack_require__(234);
 
 	var actions = _interopRequireWildcard(_postActions);
 
-	var _Post = __webpack_require__(252);
+	var _Post = __webpack_require__(253);
 
 	var _Post2 = _interopRequireDefault(_Post);
 
@@ -24939,10 +24951,14 @@
 
 				return _react2.default.createElement(
 					'div',
-					{ className: 'post-list--container' },
-					postData.map(function (item, index) {
-						return _react2.default.createElement(_Post2.default, _extends({ key: item._id }, item));
-					})
+					null,
+					_react2.default.createElement(
+						'div',
+						{ className: 'post-list--container' },
+						postData.map(function (item, index) {
+							return _react2.default.createElement(_Post2.default, _extends({ key: item._id }, item));
+						})
+					)
 				);
 			}
 		}]);
@@ -26127,7 +26143,7 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _config = __webpack_require__(271);
+	var _config = __webpack_require__(252);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27207,6 +27223,33 @@
 
 /***/ },
 /* 252 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	    'backend_url': "http://localhost:3000",
+	    'facebook': {
+	        'clientID': '471667679707612', // your App ID
+	        'clientSecret': 'f7dac6f10c01820c7fa158ae189411c0', // your App Secret
+	        'callbackURL': 'http://localhost:3000/auth/facebook/callback'
+	    },
+
+	    'twitter': {
+	        'consumerKey': '5eZIVL4qBSPa2xsycdYpRCKDt',
+	        'consumerSecret': 'berQ6j52CangIno7sCg240SLsiqHULHox0T6AnLpgjrXMpXsZU',
+	        'callbackURL': 'http://0.0.0.0:3000/auth/twitter/callback'
+	    },
+
+	    'google': {
+	        'clientID': 'your-secret-clientID-here',
+	        'clientSecret': 'your-client-secret-here',
+	        'callbackURL': 'http://127.0.0.1:8080/auth/google/callback'
+	    }
+	};
+
+/***/ },
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27223,7 +27266,7 @@
 
 	var _reactRedux = __webpack_require__(216);
 
-	var _testActions = __webpack_require__(253);
+	var _testActions = __webpack_require__(254);
 
 	var actions = _interopRequireWildcard(_testActions);
 
@@ -27286,7 +27329,7 @@
 	exports.default = Post;
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27329,12 +27372,14 @@
 	}
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _dec, _class;
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -27344,9 +27389,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _NavBar = __webpack_require__(255);
+	var _reactRedux = __webpack_require__(216);
+
+	var _NavBar = __webpack_require__(256);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
+
+	var _authed = __webpack_require__(258);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27356,7 +27405,11 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Main = (function (_React$Component) {
+	var Main = (_dec = (0, _reactRedux.connect)(function (state) {
+		return {
+			user: state.user
+		};
+	}), _dec(_class = (function (_React$Component) {
 		_inherits(Main, _React$Component);
 
 		function Main() {
@@ -27366,8 +27419,21 @@
 		}
 
 		_createClass(Main, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.props.dispatch((0, _authed.initAuthed)());
+			}
+		}, {
 			key: 'render',
 			value: function render() {
+				console.log("HOME::: ");
+				console.log(this.props);
+				// if(this.props.user.is_logged_in){
+				// 	console.log(this.props.user);
+				// }else{
+				// 	console.log("NO USER LOGGED IN");
+				// }
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'main-contianer' },
@@ -27386,12 +27452,11 @@
 		}]);
 
 		return Main;
-	})(_react2.default.Component);
-
+	})(_react2.default.Component)) || _class);
 	exports.default = Main;
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27404,7 +27469,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _SearchBar = __webpack_require__(256);
+	var _SearchBar = __webpack_require__(257);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
@@ -27441,7 +27506,7 @@
 	};
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27461,7 +27526,39 @@
 	};
 
 /***/ },
-/* 257 */
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.initAuthed = initAuthed;
+
+	var _axios = __webpack_require__(235);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _config = __webpack_require__(252);
+
+	var _authedConstants = __webpack_require__(276);
+
+	var types = _interopRequireWildcard(_authedConstants);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function initAuthed() {
+	  return {
+	    type: types.GET_USER,
+	    promise: _axios2.default.get(_config.backend_url + '/api/user')
+	  };
+	}
+
+/***/ },
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27472,35 +27569,42 @@
 
 	var _redux = __webpack_require__(223);
 
-	var _promiseMiddleware = __webpack_require__(258);
+	var _reduxThunk = __webpack_require__(260);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _promiseMiddleware = __webpack_require__(261);
 
 	var _promiseMiddleware2 = _interopRequireDefault(_promiseMiddleware);
 
-	var _reduxSimpleRouter = __webpack_require__(259);
+	var _reduxSimpleRouter = __webpack_require__(262);
 
-	var _reducerTest = __webpack_require__(263);
+	var _reducerTest = __webpack_require__(266);
 
 	var _reducerTest2 = _interopRequireDefault(_reducerTest);
 
-	var _incrementTest = __webpack_require__(264);
+	var _incrementTest = __webpack_require__(267);
 
 	var _incrementTest2 = _interopRequireDefault(_incrementTest);
 
-	var _postReducer = __webpack_require__(265);
+	var _postReducer = __webpack_require__(268);
 
 	var _postReducer2 = _interopRequireDefault(_postReducer);
 
+	var _authReducer = __webpack_require__(277);
+
+	var _authReducer2 = _interopRequireDefault(_authReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// let createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_promiseMiddleware2.default)(_redux.createStore);
-	// import thunk from 'redux-thunk';
+	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_promiseMiddleware2.default, _reduxThunk2.default)(_redux.createStore);
 
 	var reducer = (0, _redux.combineReducers)({
 	    messages: _reducerTest2.default,
 	    count: _incrementTest2.default,
 	    routing: _reduxSimpleRouter.routeReducer, // keep track of routing
-	    posts: _postReducer2.default
+	    posts: _postReducer2.default,
+	    user: _authReducer2.default
 	});
 
 	var store = createStoreWithMiddleware(reducer);
@@ -27508,7 +27612,29 @@
 	exports.default = store;
 
 /***/ },
-/* 258 */
+/* 260 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = thunkMiddleware;
+	function thunkMiddleware(_ref) {
+	  var dispatch = _ref.dispatch;
+	  var getState = _ref.getState;
+
+	  return function (next) {
+	    return function (action) {
+	      return typeof action === 'function' ? action(dispatch, getState) : next(action);
+	    };
+	  };
+	}
+	module.exports = exports['default'];
+
+/***/ },
+/* 261 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27552,7 +27678,7 @@
 	}
 
 /***/ },
-/* 259 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27567,7 +27693,7 @@
 	exports.replacePath = replacePath;
 	exports.syncReduxAndRouter = syncReduxAndRouter;
 
-	var _deepEqual = __webpack_require__(260);
+	var _deepEqual = __webpack_require__(263);
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
@@ -27752,12 +27878,12 @@
 
 
 /***/ },
-/* 260 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var pSlice = Array.prototype.slice;
-	var objectKeys = __webpack_require__(261);
-	var isArguments = __webpack_require__(262);
+	var objectKeys = __webpack_require__(264);
+	var isArguments = __webpack_require__(265);
 
 	var deepEqual = module.exports = function (actual, expected, opts) {
 	  if (!opts) opts = {};
@@ -27852,7 +27978,7 @@
 
 
 /***/ },
-/* 261 */
+/* 264 */
 /***/ function(module, exports) {
 
 	exports = module.exports = typeof Object.keys === 'function'
@@ -27867,7 +27993,7 @@
 
 
 /***/ },
-/* 262 */
+/* 265 */
 /***/ function(module, exports) {
 
 	var supportsArgumentsClass = (function(){
@@ -27893,7 +28019,7 @@
 
 
 /***/ },
-/* 263 */
+/* 266 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27920,7 +28046,7 @@
 	}
 
 /***/ },
-/* 264 */
+/* 267 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27944,7 +28070,7 @@
 	}
 
 /***/ },
-/* 265 */
+/* 268 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27985,7 +28111,7 @@
 	}
 
 /***/ },
-/* 266 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27994,7 +28120,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _createBrowserHistory = __webpack_require__(267);
+	var _createBrowserHistory = __webpack_require__(270);
 
 	var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
 
@@ -28024,7 +28150,7 @@
 
 	exports.useBasename = _useBasename3['default'];
 
-	var _useBeforeUnload2 = __webpack_require__(268);
+	var _useBeforeUnload2 = __webpack_require__(271);
 
 	var _useBeforeUnload3 = _interopRequireDefault(_useBeforeUnload2);
 
@@ -28044,20 +28170,20 @@
 
 	// deprecated
 
-	var _enableBeforeUnload2 = __webpack_require__(269);
+	var _enableBeforeUnload2 = __webpack_require__(272);
 
 	var _enableBeforeUnload3 = _interopRequireDefault(_enableBeforeUnload2);
 
 	exports.enableBeforeUnload = _enableBeforeUnload3['default'];
 
-	var _enableQueries2 = __webpack_require__(270);
+	var _enableQueries2 = __webpack_require__(273);
 
 	var _enableQueries3 = _interopRequireDefault(_enableQueries2);
 
 	exports.enableQueries = _enableQueries3['default'];
 
 /***/ },
-/* 267 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28235,7 +28361,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 268 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28352,7 +28478,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 269 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28365,7 +28491,7 @@
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
-	var _useBeforeUnload = __webpack_require__(268);
+	var _useBeforeUnload = __webpack_require__(271);
 
 	var _useBeforeUnload2 = _interopRequireDefault(_useBeforeUnload);
 
@@ -28373,7 +28499,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 270 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28394,31 +28520,193 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 271 */
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _dec, _class;
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(5);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(216);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// user: state.user,
+	var Profile = (_dec = (0, _reactRedux.connect)(function (state) {
+		return {};
+	}), _dec(_class = (function (_React$Component) {
+		_inherits(Profile, _React$Component);
+
+		function Profile() {
+			_classCallCheck(this, Profile);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Profile).apply(this, arguments));
+		}
+
+		_createClass(Profile, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				console.log("PROFILE MOUNTED");
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				console.log("!!!Unmounting");
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'h1',
+					null,
+					'Profile'
+				);
+			}
+		}]);
+
+		return Profile;
+	})(_react2.default.Component)) || _class);
+	;
+
+	exports.default = Profile;
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _dec, _class;
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(5);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(216);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// user: state.user,
+	var ProfileEdit = (_dec = (0, _reactRedux.connect)(function (state) {
+		return {};
+	}), _dec(_class = (function (_React$Component) {
+		_inherits(ProfileEdit, _React$Component);
+
+		function ProfileEdit() {
+			_classCallCheck(this, ProfileEdit);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(ProfileEdit).apply(this, arguments));
+		}
+
+		_createClass(ProfileEdit, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				console.log("PROFILE MOUNTED");
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				console.log("!!!Unmounting");
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'h1',
+					null,
+					'Profile Edit'
+				);
+			}
+		}]);
+
+		return ProfileEdit;
+	})(_react2.default.Component)) || _class);
+	;
+
+	exports.default = ProfileEdit;
+
+/***/ },
+/* 276 */
 /***/ function(module, exports) {
 
 	'use strict';
 
-	module.exports = {
-	    'backend_url': "http://localhost:3000",
-	    'facebook': {
-	        'clientID': '471667679707612', // your App ID
-	        'clientSecret': 'f7dac6f10c01820c7fa158ae189411c0', // your App Secret
-	        'callbackURL': 'http://localhost:3000/auth/facebook/callback'
-	    },
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var GET_USER = exports.GET_USER = 'GET_USER';
 
-	    'twitter': {
-	        'consumerKey': '5eZIVL4qBSPa2xsycdYpRCKDt',
-	        'consumerSecret': 'berQ6j52CangIno7sCg240SLsiqHULHox0T6AnLpgjrXMpXsZU',
-	        'callbackURL': 'http://0.0.0.0:3000/auth/twitter/callback'
-	    },
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
 
-	    'google': {
-	        'clientID': 'your-secret-clientID-here',
-	        'clientSecret': 'your-client-secret-here',
-	        'callbackURL': 'http://127.0.0.1:8080/auth/google/callback'
-	    }
-	};
+	"use strict";
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = authedReducer;
+
+	var _authedConstants = __webpack_require__(276);
+
+	var types = _interopRequireWildcard(_authedConstants);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function authedReducer() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? {
+			userData: {},
+			is_logged_in: false
+		} : arguments[0];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case types.GET_USER:
+				console.log("GOT USER@!");
+				console.log(action.res.data);
+				return _extends({}, state, {
+					userData: _extends({}, action.res.data),
+					is_logged_in: true
+				});
+			case types.GET_USER + "_FAILURE":
+				console.log("FAILED Logged in");
+				return _extends({}, state, {
+					is_logged_in: false
+				});
+			default:
+				return state;
+		}
+	}
 
 /***/ }
 /******/ ]);

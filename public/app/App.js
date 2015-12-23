@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { Router } from 'react-router';
 import routes from './config/routes.js';
 import { Provider } from 'react-redux';
-import store from './store/Store';
+import store from './store/store';
 import { createHistory } from 'history';
 import { syncReduxAndRouter } from 'redux-simple-router'
 
@@ -14,7 +14,7 @@ syncReduxAndRouter(history, store)
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Router history={history}>{routes}</Router>
+		<Router history={history} store={store}>{routes}</Router>
 	</Provider>,
 	document.getElementById('app')
 )

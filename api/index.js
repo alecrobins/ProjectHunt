@@ -102,5 +102,10 @@ module.exports = function(app, connection) {
 	// SEARCH
 	// TODO: search needs to query posts based on 	
 	app.get('/api/search/:query', db, routes.search.getPosts);
-
+	
+	// Reroute all other routes to the index adn let
+	// the front end router handle the routes
+	app.get('*', function(req, res) {
+    res.redirect('/');
+  });
 };
