@@ -1,5 +1,6 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var config = require('../config');
 var models = require('../models/');
@@ -122,6 +123,53 @@ module.exports = function(connection){
         });
 
     }));
+
+    passport.use(new TwitterStrategy({
+        consumerKey: config.twitter.consumerKey,
+        consumerSecret: config.twitter.consumerSecret,
+        callbackURL: config.twitter.callbackURL
+      },
+      function(token, tokenSecret, profile, done) {
+        console.log("SIGNED IN");
+        
+        var profile = profile._json;
+
+        process.nextTick(function() {
+            var User = connection.model('User', models.User, 'users');
+            // find the user in the database based on their facebook id
+            User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+
+                if (err)
+                    return done(err);
+
+                if (user) {
+                    return done(null, user); // user found, return that user
+                } else {
+                    
+                    console.log("CREATE NEW USER");
+                    // create a new user if not set
+                    var newUser = new User();
+
+                    newUser.twitter.id = profile.id;
+                    newUser.twitter.token = token;
+                    newUser.name  = profile.name;
+                    newUser.photo_url = profile.profile_image_url;
+                    newUser.bio = profile.description;
+                    
+                    console.log(newUser);
+
+                    // save our user to the database
+                    newUser.save(function(err) {
+                        if (err) throw err;
+                        // if successful, return the new user
+                        return done(null, newUser);
+                    });
+                }
+
+            });
+        });
+      }
+    ));
 
   passport.serializeUser(function(user, done) {
       done(null, user);

@@ -13,15 +13,22 @@ var PostSchema = new mongoose.Schema({
    	type: Schema.Types.ObjectId,
    	ref: 'User'
   	}],
-  	"like_count":{
-  		type: Number,
-  		default: 0
-  	},
+	"like_count":{
+		type: Number,
+		default: 0
+	},
 	"title": { 
 		required: true,
 		type: String,
 		trim: true,
 		max: 1000
+	},
+	"tag_line": {
+		default: "", 
+		required: true,
+		type: String,
+		trim: true,
+		max: 2000
 	},
 	"description": {
 		required: true,
@@ -29,10 +36,22 @@ var PostSchema = new mongoose.Schema({
 		trim: true,
 		max: 3000
 	},
+	"is_started":{
+		type: Boolean,
+		default: false,
+	},
 	"talent_needed": [{
 		type: Schema.Types.ObjectId,
 		ref: 'Talent'
 	}],
+	"tags": [{
+		type: Schema.Types.ObjectId,
+		ref: 'Tag'
+	}],
+	"location": {
+		type: [Number],
+    index: '2dsphere' 
+	},
 	"created_at": {
 		required: true,
 		type: Date,
@@ -58,15 +77,18 @@ var PostSchema = new mongoose.Schema({
 			type: String,
 			trim: true
 		},
-		"website": {
+		"links": [{
 			type: String,
 			trim: true
-		},
+		}],
 	}
 });
 
 // Create an index on the title and description
 PostSchema.index({ title: 'text', description: 'text'}, {name: 'Post index', weights: {title: 5, description: 4}});
+PostSchema.index({location: "2dsphere"});
+PostSchema.index({talent_needed: 1});
+
 PostSchema.plugin(mongoosePaginate);
 
 // export the schema

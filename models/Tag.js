@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var randomColor = require('randomcolor');
 var Schema = mongoose.Schema;
 
-var TalentSchema = new mongoose.Schema({
+var TagSchema = new mongoose.Schema({
  	"name": {
  		type: String,
  		max: 1000,
@@ -13,12 +13,13 @@ var TalentSchema = new mongoose.Schema({
  		type: Number,
   	default: 0
  	},
-	"color": {
+	"icon": { // correlates to the font awesome 
 		type: String,
-		default: randomColor({ luminosity: 'bright' })
+		required: true,
+		default: "fa-tag",
 	}
 });
 
-TalentSchema.index({name: 1});
+TagSchema.index({name: 1});
 
-exports.schema = TalentSchema;
+exports.schema = TagSchema;

@@ -11,10 +11,8 @@ var UserSchema = new mongoose.Schema({
 		max: 1000
 	},
 	"email":  {
-		required: true,
 		type: String,
 		max: 1000,
-		unique: true
 	},
 	"banned": {
    	type: Boolean,
@@ -30,11 +28,19 @@ var UserSchema = new mongoose.Schema({
 		default: Date.now
 	},
 	"photo_url": String,
-	"occupation": {
+	"bio": {
 		type: String,
 		max: 1000
 	},
+	"talent": [{
+		type: Schema.Types.ObjectId,
+		ref: 'Talent'
+	}],
 	"facebook":{
+		"id": String,
+		"token": String,
+	},
+	"twitter":{
 		"id": String,
 		"token": String,
 	},

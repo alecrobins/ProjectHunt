@@ -10,7 +10,8 @@ module.exports = function(app, connection){
 	  req.db = {
 	    User: connection.model('User', models.User, 'users'),
 	    Post: connection.model('Post', models.Post, 'posts'),
-	    Talent: connection.model('Talent', models.Talent, 'talents')
+	    Talent: connection.model('Talent', models.Talent, 'talents'),
+	    Tag: connection.model('Tag', models.Tag, 'tags')
 	  };
 	  return next();
 	}
@@ -52,15 +53,24 @@ module.exports = function(app, connection){
          failureRedirect : '/login'
       }));
 
-   app.get('/api/logout', function(req, res, next) {
+	// TWITTER AUTH
+	app.get('/auth/twitter', passport.authenticate('twitter'));
+	app.get('/auth/twitter/callback',
+  		passport.authenticate('twitter', {
+         successRedirect : '/',
+         failureRedirect : '/login'
+      }));
+
+  app.get('/api/logout', function(req, res, next) {
 
 		req.logout();
 		console.info('Logout USER: ' + req.session.userId);
   		
-  		req.session.destroy(function(error) {
-    		if (error) next(error);
+		req.session.destroy(function(error) {
+  		if (error) next(error);
 			res.redirect('/');
-  		});});
+		});
+  });
 
 	//MAIN
 	app.get('/api/profile', passport.authenticate('facebook'), db, routes.main.profile);
@@ -77,7 +87,12 @@ module.exports = function(app, connection){
 	// TALENT
 	//TODO: need to add routes:
 		// - add new talent
-		// - delete talent
+		// - search posts that contain talents
+	
+	// TAG
+	//TODO: need to add routes:
+		// - add new tag
+		// - delete tag
 		// - search posts that contain talents
 
 	// ACTIONS
@@ -89,7 +104,8 @@ module.exports = function(app, connection){
 	app.put('/api/users/:id', isLoggedIn, db, routes.users.update);
 	app.delete('/api/users/:id', isLoggedIn, db, routes.users.delete);
 
-	// //SEARCH
+	// SEARCH
+	// TODO: search needs to query posts based on 	
 	app.get('/api/search/:query', db, routes.search.getPosts);
 
 };
