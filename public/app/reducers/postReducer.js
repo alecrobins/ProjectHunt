@@ -1,21 +1,27 @@
+import * as types from '../constants/postConstants'
+
 export default function postReducer(state = {
 	postData: []
 }, action) {
 	switch (action.type) {
-		case 'GET_POSTS':
-			console.log("GOT POST@!");
-			console.log(action.res);
+		case types.GET_POSTS:
 			return {
 				...state,
 				postData: [...action.res.data]
 			};
-		case 'GET_POSTS_REQUEST':
-			console.log("GET_POSTS_REQUEST");
-			console.log(action);
+		case `${types.GET_POSTS}_REQUEST`:
 			return state;
-		case 'GET_POSTS_FAILURE':
-			console.log("~~~GET_POSTS_FAILURE");
-			console.log(action);	
+		case `${types.GET_POSTS}_FAILURE`:
+			return state;
+		case types.CREATE_POST:
+			console.log("Succesfully posted");
+			// TODO: dispatch command that post was
+			// created succefully
+			return state;
+		case `${types.CREATE_POST}_FAILURE`:
+			console.log("Failed posting post");
+			// TODO: need to dispatch a toastr signalling 
+			// what went wrong
 			return state;
 		default:
 			return state;

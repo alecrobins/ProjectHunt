@@ -26,8 +26,10 @@ module.exports.add = function (req, res, next) {
 		req.db.Post.create({
 			"post_author": req.session.passport.user._id,
 			"title": req.body.title,
+			"tag_line": req.body.tag_line,
 			"description": req.body.description,
 			"talent_needed": req.body.talent_needed || null,
+			"tags": req.body.tags || null,
 			"feature_img": req.body.feature_img || null,
 			"imgs": req.body.imgs || null,
 			"contact": req.body.contact != null ?

@@ -15,7 +15,7 @@ class NavBar extends React.Component {
 	render(){
 		// <button onClick={() => this.props.dispatch(uiActions.loginClicked())}>
 		const logIn = this.props.user.is_logged_in ?
-			<NavBarUser {...this.props.user} /> :
+			<NavBarUser {...this.props} /> :
 			<a href="/auth/facebook">SIGN IN</a>
 
 		return (

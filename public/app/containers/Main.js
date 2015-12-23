@@ -14,13 +14,6 @@ class Main extends React.Component{
 		this.props.dispatch(initAuthed());
 	}
 	render() {
-		console.log("HOME::: ");
-		console.log(this.props);
-		// if(this.props.user.is_logged_in){
-		// 	console.log(this.props.user);
-		// }else{
-		// 	console.log("NO USER LOGGED IN");
-		// }
 
 		return (
 			<div className="main-contianer">

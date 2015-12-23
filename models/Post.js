@@ -48,10 +48,10 @@ var PostSchema = new mongoose.Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Tag'
 	}],
-	"location": {
-		type: [Number],
-    index: '2dsphere' 
-	},
+	// "location": {
+	// 	type: String,
+ //    index: '2dsphere' 
+	// },
 	"created_at": {
 		required: true,
 		type: Date,

@@ -24865,6 +24865,10 @@
 
 	var _ProfileEdit2 = _interopRequireDefault(_ProfileEdit);
 
+	var _Form = __webpack_require__(281);
+
+	var _Form2 = _interopRequireDefault(_Form);
+
 	var _reactRouter = __webpack_require__(163);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -24874,6 +24878,7 @@
 		{ path: '/', component: _Main2.default },
 		_react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Profile2.default }),
 		_react2.default.createElement(_reactRouter.Route, { path: 'profile/edit', component: _ProfileEdit2.default }),
+		_react2.default.createElement(_reactRouter.Route, { path: 'createPost', component: _Form2.default }),
 		_react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default })
 	);
 
@@ -26138,19 +26143,33 @@
 	  value: true
 	});
 	exports.getPosts = getPosts;
+	exports.createPost = createPost;
 
 	var _axios = __webpack_require__(235);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _postConstants = __webpack_require__(282);
+
+	var types = _interopRequireWildcard(_postConstants);
+
 	var _config = __webpack_require__(252);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function getPosts() {
 	  return {
-	    type: 'GET_POSTS',
+	    type: types.GET_POSTS,
 	    promise: _axios2.default.get(_config.backend_url + '/api/posts')
+	  };
+	}
+
+	function createPost(postData) {
+	  return {
+	    type: types.CREATE_POST,
+	    promise: _axios2.default.post(_config.backend_url + '/api/posts', postData)
 	  };
 	}
 
@@ -27426,13 +27445,6 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				console.log("HOME::: ");
-				console.log(this.props);
-				// if(this.props.user.is_logged_in){
-				// 	console.log(this.props.user);
-				// }else{
-				// 	console.log("NO USER LOGGED IN");
-				// }
 
 				return _react2.default.createElement(
 					'div',
@@ -27514,7 +27526,7 @@
 			key: 'render',
 			value: function render() {
 				// <button onClick={() => this.props.dispatch(uiActions.loginClicked())}>
-				var logIn = this.props.user.is_logged_in ? _react2.default.createElement(_NavBarUser2.default, this.props.user) : _react2.default.createElement(
+				var logIn = this.props.user.is_logged_in ? _react2.default.createElement(_NavBarUser2.default, this.props) : _react2.default.createElement(
 					'a',
 					{ href: '/auth/facebook' },
 					'SIGN IN'
@@ -28100,9 +28112,9 @@
 
 /***/ },
 /* 268 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -28110,6 +28122,12 @@
 		value: true
 	});
 	exports.default = postReducer;
+
+	var _postConstants = __webpack_require__(282);
+
+	var types = _interopRequireWildcard(_postConstants);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -28120,19 +28138,23 @@
 		var action = arguments[1];
 
 		switch (action.type) {
-			case 'GET_POSTS':
-				console.log("GOT POST@!");
-				console.log(action.res);
+			case types.GET_POSTS:
 				return _extends({}, state, {
 					postData: [].concat(_toConsumableArray(action.res.data))
 				});
-			case 'GET_POSTS_REQUEST':
-				console.log("GET_POSTS_REQUEST");
-				console.log(action);
+			case types.GET_POSTS + "_REQUEST":
 				return state;
-			case 'GET_POSTS_FAILURE':
-				console.log("~~~GET_POSTS_FAILURE");
-				console.log(action);
+			case types.GET_POSTS + "_FAILURE":
+				return state;
+			case types.CREATE_POST:
+				console.log("Succesfully posted");
+				// TODO: dispatch command that post was
+				// created succefully
+				return state;
+			case types.CREATE_POST + "_FAILURE":
+				console.log("Failed posting post");
+				// TODO: need to dispatch a toastr signalling
+				// what went wrong
 				return state;
 			default:
 				return state;
@@ -28794,6 +28816,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reduxSimpleRouter = __webpack_require__(262);
+
 	var _uiActions = __webpack_require__(278);
 
 	var uiActions = _interopRequireWildcard(_uiActions);
@@ -28820,20 +28844,24 @@
 		_createClass(NavBarUser, [{
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(
-						'h3',
-						null,
-						' Nav bar user '
-					),
-					_react2.default.createElement('img', { src: this.props.userData.photo_url, alt: 'Profile picture' }),
-					this.props.userData.name,
+					_react2.default.createElement('img', { src: this.props.user.userData.photo_url, alt: 'Profile picture' }),
+					this.props.user.userData.name,
 					_react2.default.createElement(
 						'a',
 						{ href: '/api/logout' },
 						'Log Out'
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: function onClick() {
+								return _this2.props.dispatch((0, _reduxSimpleRouter.pushPath)('/createPost'));
+							} },
+						'Creat Post'
 					)
 				);
 			}
@@ -28843,6 +28871,140 @@
 	})(_react2.default.Component);
 
 	exports.default = NavBarUser;
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _dec, _class;
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(5);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(216);
+
+	var _postActions = __webpack_require__(234);
+
+	var postActions = _interopRequireWildcard(_postActions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Form = (_dec = (0, _reactRedux.connect)(function (state) {
+		return {
+			user: state.user
+		};
+	}), _dec(_class = (function (_React$Component) {
+		_inherits(Form, _React$Component);
+
+		function Form() {
+			_classCallCheck(this, Form);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Form).apply(this, arguments));
+		}
+
+		_createClass(Form, [{
+			key: 'submitForm',
+			value: function submitForm() {
+				console.log("Submitting the form");
+
+				var postData = {
+					"title": this._title.value,
+					"tag_line": this._tagLine.value,
+					"description": this._description.value
+				};
+
+				// "talent_needed": req.body.talent_needed || null,
+				// "tags": req.body.tags || null,
+				// "feature_img": req.body.feature_img || null,
+				// "imgs": req.body.imgs || null,
+				// "contact": req.body.contact != null ?
+				// 	{
+				// 		"email": req.body.contact.email || null,
+				// 		"phone": req.body.contact.phone || null,
+				// 		"github": req.body.contact.github || null,
+				// 		"website": req.body.contact.website || null
+				// 	}
+				// submit the post
+				this.props.dispatch(postActions.createPost(postData));
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				// goto home if user is not logged in
+				if (!this.props.user.is_logged_in) this.props.dispatch(pushPath('/'));
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'form-contianer' },
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'title' },
+						'Title'
+					),
+					_react2.default.createElement('input', { type: 'text', name: 'title', ref: function ref(c) {
+							return _this2._title = c;
+						} }),
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'tagLine' },
+						'Tag Line'
+					),
+					_react2.default.createElement('input', { type: 'text', name: 'tagLine', ref: function ref(c) {
+							return _this2._tagLine = c;
+						} }),
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'description' },
+						'Tag Line'
+					),
+					_react2.default.createElement('textarea', { type: 'text', name: 'description', ref: function ref(c) {
+							return _this2._description = c;
+						} }),
+					_react2.default.createElement(
+						'button',
+						{ onClick: function onClick() {
+								return _this2.submitForm();
+							} },
+						'Submit'
+					)
+				);
+			}
+		}]);
+
+		return Form;
+	})(_react2.default.Component)) || _class);
+	exports.default = Form;
+
+/***/ },
+/* 282 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var CREATE_POST = exports.CREATE_POST = 'CREATE_POST';
+	var GET_POSTS = exports.GET_POSTS = 'GET_POSTS';
 
 /***/ }
 /******/ ]);
