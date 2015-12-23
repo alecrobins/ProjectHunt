@@ -24944,8 +24944,16 @@
 				this.props.dispatch(actions.getPosts());
 			}
 		}, {
+			key: 'handleClick',
+			value: function handleClick(postID) {
+				console.log(postID);
+				this.props.dispatch(actions.likePost(postID));
+			}
+		}, {
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				var postData = this.props.posts.postData;
 
 				if (postData === []) return _react2.default.createElement(
@@ -24961,7 +24969,9 @@
 						'div',
 						{ className: 'post-list--container' },
 						postData.map(function (item, index) {
-							return _react2.default.createElement(_Post2.default, _extends({ key: item._id }, item));
+							return _react2.default.createElement(_Post2.default, _extends({ likePost: function likePost() {
+									return _this2.handleClick(item._id);
+								}, key: item._id }, item));
 						})
 					)
 				);
@@ -26144,6 +26154,7 @@
 	});
 	exports.getPosts = getPosts;
 	exports.createPost = createPost;
+	exports.likePost = likePost;
 
 	var _axios = __webpack_require__(235);
 
@@ -26170,6 +26181,13 @@
 	  return {
 	    type: types.CREATE_POST,
 	    promise: _axios2.default.post(_config.backend_url + '/api/posts', postData)
+	  };
+	}
+
+	function likePost(postID) {
+	  return {
+	    type: types.LIKE_POST,
+	    promise: _axios2.default.post(_config.backend_url + '/api/actions/like', { id: postID })
 	  };
 	}
 
@@ -27311,6 +27329,8 @@
 		_createClass(Post, [{
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'post--container' },
@@ -27335,6 +27355,13 @@
 						null,
 						'Updated at: ',
 						this.props.created_at
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: function onClick() {
+								return _this2.props.likePost();
+							} },
+						'Like Post'
 					)
 				);
 			}
@@ -27526,7 +27553,7 @@
 			key: 'render',
 			value: function render() {
 				// <button onClick={() => this.props.dispatch(uiActions.loginClicked())}>
-				var logIn = this.props.user.is_logged_in ? _react2.default.createElement(_NavBarUser2.default, this.props) : _react2.default.createElement(
+				var login = this.props.user.is_logged_in ? _react2.default.createElement(_NavBarUser2.default, this.props) : _react2.default.createElement(
 					'a',
 					{ href: '/auth/facebook' },
 					'SIGN IN'
@@ -27537,7 +27564,11 @@
 					{ className: 'nav-container -clear' },
 					_react2.default.createElement('img', { src: 'assets/imgs/logo.png', alt: 'Project Hunt Logo', className: 'nav-logo' }),
 					_react2.default.createElement(_SearchBar2.default, null),
-					logIn
+					_react2.default.createElement(
+						'div',
+						{ className: 'nav-container--login' },
+						login
+					)
 				);
 			}
 		}]);
@@ -28155,6 +28186,14 @@
 				console.log("Failed posting post");
 				// TODO: need to dispatch a toastr signalling
 				// what went wrong
+				return state;
+			case types.LIKE_POST:
+				console.log("Succesfully liked the post!!!");
+				console.log(action);
+				return state;
+			case types.LIKE_POST + "_FAILURE":
+				console.log("FAILED liking the post");
+				console.log(action);
 				return state;
 			default:
 				return state;
@@ -29005,6 +29044,7 @@
 	});
 	var CREATE_POST = exports.CREATE_POST = 'CREATE_POST';
 	var GET_POSTS = exports.GET_POSTS = 'GET_POSTS';
+	var LIKE_POST = exports.LIKE_POST = 'LIKE_POST';
 
 /***/ }
 /******/ ]);

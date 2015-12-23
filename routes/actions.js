@@ -2,6 +2,7 @@
 
 // POST 'api/actions/like' (id of the post is passed in the body of the request)
 module.exports.like = function(req, res, next){
+	console.log("LIKE ID: ", req.body.id);
 	if(req.body){
 		// only update if user has not already liked the post
 		// increment like count and add user to the list of liked user

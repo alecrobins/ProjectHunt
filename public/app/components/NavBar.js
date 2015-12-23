@@ -14,7 +14,7 @@ class NavBar extends React.Component {
 
 	render(){
 		// <button onClick={() => this.props.dispatch(uiActions.loginClicked())}>
-		const logIn = this.props.user.is_logged_in ?
+		const login = this.props.user.is_logged_in ?
 			<NavBarUser {...this.props} /> :
 			<a href="/auth/facebook">SIGN IN</a>
 
@@ -22,7 +22,9 @@ class NavBar extends React.Component {
 			<div className="nav-container -clear">
 				<img src="assets/imgs/logo.png" alt="Project Hunt Logo" className="nav-logo" />
 				<SearchBar />
-				{logIn}
+				<div className="nav-container--login">
+					{login}
+				</div>
 			</div>
 		)	
 	}

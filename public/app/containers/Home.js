@@ -21,6 +21,11 @@ class Home extends React.Component {
 		this.props.dispatch(actions.getPosts());
 	}
 
+	handleClick(postID){
+		console.log(postID);
+		this.props.dispatch(actions.likePost(postID));
+	}
+
 	render() {
 		const { postData } = this.props.posts;
 		if(postData === []) return <h1> LOADING </h1>
@@ -28,7 +33,8 @@ class Home extends React.Component {
 		return (
 			<div>
 				<div className="post-list--container">
-					{postData.map((item, index) => <Post key={item._id} {...item} />)}
+					{postData.map((item, index) => 
+						<Post likePost={() => this.handleClick(item._id)} key={item._id} {...item} />)}
 				</div>
 			</div>
 		);

@@ -23,6 +23,14 @@ export default function postReducer(state = {
 			// TODO: need to dispatch a toastr signalling 
 			// what went wrong
 			return state;
+		case types.LIKE_POST:
+			console.log("Succesfully liked the post!!!");
+			console.log(action);
+			return state;
+		case `${types.LIKE_POST}_FAILURE`:
+			console.log("FAILED liking the post");
+			console.log(action);
+			return state;
 		default:
 			return state;
 	}

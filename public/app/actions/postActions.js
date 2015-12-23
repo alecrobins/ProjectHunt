@@ -15,3 +15,10 @@ export function createPost(postData) {
     promise: request.post(`${backend_url}/api/posts`, postData)
   }
 }
+
+export function likePost(postID){
+	return{
+		type: types.LIKE_POST,
+		promise: request.post(`${backend_url}/api/actions/like`, {id: postID})
+	}
+}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/testActions';
 
 class Post extends React.Component {
+
 	render() {
 		return (
 			<div className="post--container">
@@ -10,6 +11,7 @@ class Post extends React.Component {
 				<h3>Likes: {this.props.like_count}</h3>
 				<p>{this.props.description}</p>
 				<small>Updated at: {this.props.created_at}</small>
+				<button onClick={() => this.props.likePost()}>Like Post</button>
 			</div>
 		);
 	}
