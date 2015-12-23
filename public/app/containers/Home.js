@@ -6,17 +6,12 @@ import Post from '../components/Post';
 
 @connect((state) => {
     return {
-    	count: state.count,
     	posts: state.posts
     }
 })
 
 class Home extends React.Component {
 	
-	constructor(){
-		super();
-	}
-
 	componentDidMount(){
 		this.props.dispatch(actions.getPosts());
 	}
@@ -31,11 +26,12 @@ class Home extends React.Component {
 		if(postData === []) return <h1> LOADING </h1>
 
 		return (
-			<div>
-				<div className="post-list--container">
-					{postData.map((item, index) => 
-						<Post likePost={() => this.handleClick(item._id)} key={item._id} {...item} />)}
-				</div>
+			<div className="post-list--container">
+				{postData.map((item, index) =>
+					(<div key={item._id} className="post-container--outer">
+						<Post likePost={() => this.handleClick(item._id)} key={item._id} {...item} />
+					</div>)
+				)}
 			</div>
 		);
 	}

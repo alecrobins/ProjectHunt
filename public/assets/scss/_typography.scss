@@ -1,41 +1,71 @@
-.h1,
-.h2,
-.h3 {
-	font-weight: 700;
-}
-
-.h4,
-.h5 {
-	font-weight: 500;
-}
-
 .h1 {
-	font-size: 36px;
-	cursor: pointer;
-	letter-spacing: -1px;
+	font-weight: 600;
+	font-size: 28px;
 }
 
-.h3__blue {
-	font-size: 22px;
+.h1__title{
+	font-weight: 600;
+	font-size: 28px;
+	color: $main-grey;
+	margin-bottom: $default-margin / 2;
+}
+
+.h2 {
+	font-weight: 500;
+	font-size: 16px;
+}
+
+.h2__tagline{
+	font-weight: 500;
+	font-size: 16px;
+	color: $secondary-grey;
+	margin-bottom: $default-margin / 2;
+}
+
+.h3__login {
+	font-weight: 900;
+	font-size: 18px;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 40px;
+}
+
+.h3__likes {
 	font-weight: 700;
+	font-size: 14px;
+	color: $secondary-grey
+
+	&-active{
+		font-weight: 900;
+		color: $main-grey;
+	}
+}
+
+.h4 {
+	font-weight: 700;
+	font-size: 12px;
+	color: $secondary-grey;
 	text-transform: uppercase;
 }
 
-.h5 {
-	font-size:  14px;
-}
-
-.h5__green{
-}
-
-.h5__red{
-}
-
-.p__detail{
+.h4__icon{
+	font-weight: 700;
 	font-size: 12px;
-	line-height: 16px;
+	color: white;
+	text-transform: uppercase;	
 }
 
-.p__inline{
-	display: inline-block;
+.h5__date {
+	font-weight: 500;
+	font-size: 13px;
+	color: $main-grey;
+	text-transform: uppercase;
+	letter-spacing: 60px;
+}
+
+.p__main {
+	font-weight: 300;
+	font-size: 12px;
+	color: $main-grey;
+	line-height: 24px;
 }

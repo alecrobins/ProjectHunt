@@ -17,7 +17,7 @@ class Main extends React.Component{
 
 		return (
 			<div className="main-contianer">
-				<div>
+				<div className="nav-container--outer">
 					<NavBar />
 				</div>
 				<div className="contianer">

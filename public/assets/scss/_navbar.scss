@@ -1,21 +1,25 @@
-.nav-container{
+.nav-container--outer{
+	background: $project-green;
+	width: 100%;	
+}
+
+.nav-container--inner{
 	display: block;
 	position: relative;
-	background: $project-green;
 	padding: $default-padding;
 	max-width: $max-page-width;
 	margin: 0 auto;
+}
 
-	&--login{
-		float: right;
-	}
+.nav-searchbar{
+	display: block;
+	position: absolute;
+	width: 40%;
+	left: 30%;
+}
 
-	&--searchbar{
-		display: block;
-		position: absolute;
-		width: 40%;
-		left: 30%;
-	}
+.nav-login{
+	float: right;
 }
 
 .nav-logo {

@@ -1,8 +1,16 @@
 .post-list--container {
-  width: 760px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.post--container {
-  margin: $default-margin*2 0;
+.post-container--outer{
+	padding: $default-padding;
+}
+
+.post-container--inner{
+	@include display-flex;
+}
+
+.post-social{
+	margin-right: $default-margin;
 }

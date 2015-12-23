@@ -19,10 +19,10 @@ class NavBar extends React.Component {
 			<a href="/auth/facebook">SIGN IN</a>
 
 		return (
-			<div className="nav-container -clear">
+			<div className="nav-container--inner -clear">
 				<img src="assets/imgs/logo.png" alt="Project Hunt Logo" className="nav-logo" />
 				<SearchBar />
-				<div className="nav-container--login">
+				<div className="nav-login">
 					{login}
 				</div>
 			</div>
