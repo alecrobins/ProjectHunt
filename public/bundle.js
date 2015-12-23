@@ -26127,12 +26127,14 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _config = __webpack_require__(271);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function getPosts() {
 	  return {
 	    type: 'GET_POSTS',
-	    promise: _axios2.default.get("http://localhost:3000/api/posts")
+	    promise: _axios2.default.get(_config.backend_url + '/api/posts')
 	  };
 	}
 
@@ -28390,6 +28392,33 @@
 
 	exports['default'] = _deprecate2['default'](_useQueries2['default'], 'enableQueries is deprecated, use useQueries instead');
 	module.exports = exports['default'];
+
+/***/ },
+/* 271 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	    'backend_url': "http://localhost:3000",
+	    'facebook': {
+	        'clientID': '471667679707612', // your App ID
+	        'clientSecret': 'f7dac6f10c01820c7fa158ae189411c0', // your App Secret
+	        'callbackURL': 'http://localhost:3000/auth/facebook/callback'
+	    },
+
+	    'twitter': {
+	        'consumerKey': '5eZIVL4qBSPa2xsycdYpRCKDt',
+	        'consumerSecret': 'berQ6j52CangIno7sCg240SLsiqHULHox0T6AnLpgjrXMpXsZU',
+	        'callbackURL': 'http://0.0.0.0:3000/auth/twitter/callback'
+	    },
+
+	    'google': {
+	        'clientID': 'your-secret-clientID-here',
+	        'clientSecret': 'your-client-secret-here',
+	        'callbackURL': 'http://127.0.0.1:8080/auth/google/callback'
+	    }
+	};
 
 /***/ }
 /******/ ]);
