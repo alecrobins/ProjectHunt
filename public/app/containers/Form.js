@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as postActions from '../actions/postActions';
 import * as tagHintsActions from '../actions/tagHintsActions';
 import * as talentHintsActions from '../actions/talentHintsActions';
+import * as formActions from '../actions/formActions';
 
 import Autocomplete from 'react-autocomplete';
 import Talent from '../components/Talent';
@@ -11,7 +12,8 @@ import Talent from '../components/Talent';
     return {
     	user: state.user,
     	tagHints: state.tagHints,
-    	talentHints: state.talentHints
+    	talentHints: state.talentHints,
+    	formData: state.formData
     }
 })
 
@@ -43,6 +45,23 @@ class Form extends React.Component{
 		// TODO: need to change the path to the home page
 	}
 	
+	// updateFormData(...data){
+	updateFormData(formData){
+		
+		console.log("Update Form");
+		// const formData = {
+		// 	...this.props.formData
+		// 	"title": this._title.value,
+		// 	"tag_line": this._tagLine.value,
+		// 	"description": this._description.value,
+		// 	...data[0]
+		// }
+
+		// console.log(formData);
+
+		this.props.dispatch(formActions.setTempPostData(formData));
+	}
+
 	componentWillUnmount() {
 		// TODO: need to reset all the temp features
 	}
@@ -51,17 +70,41 @@ class Form extends React.Component{
 		// goto home if user is not logged in
 		if(!this.props.user.is_logged_in)
 			this.props.dispatch(pushPath('/'));
+		
+		console.log("Form Data: ");
+		console.log(this.props.formData);
 
 		return (
 			<div className="form-container">
 				<label htmlFor="title">Title</label>
-				<input type="text" name="title" ref={(c) => this._title = c} /><br />
+				<input
+					type="text"
+					name="title"
+					ref={(c) => this._title = c} 
+					onChange={() => this.updateFormData({
+						"title": this._title.value
+					})}
+				/><br />
 				
 				<label htmlFor="tagLine">Tag Line</label>
-				<input type="text" name="tagLine" ref={(c) => this._tagLine = c} /><br />
+				<input
+					type="text"
+					name="tagLine"
+					ref={(c) => this._tagLine = c}
+					onChange={() => this.updateFormData({
+						"tag_line": this._tagLine.value
+					})}
+				/><br />
 
 				<label htmlFor="description">Description</label>
-				<textarea type="text" name="description" ref={(c) => this._description = c} /><br />
+				<textarea
+					type="text"
+					name="description"
+					ref={(c) => this._description = c}
+					onChange={() => this.updateFormData({
+						"description": this._description.value
+					})}
+				/><br />
 
 				<label htmlFor="talentNeeded">Tags</label>
 				<Autocomplete
@@ -69,8 +112,10 @@ class Form extends React.Component{
           items={this.props.tagHints}
           getItemValue={(item) => item.name}
           onSelect={(value, item) => {
-            // TODO: need to dispatch the item as selected
             console.log("ITEM SECLTED: ", item);
+            this.updateFormData({
+            	tags: [item]
+            })
           }}
           onChange={(event, value) => {
             // TODO: need to only dispatch a request to get
@@ -94,8 +139,10 @@ class Form extends React.Component{
           items={this.props.talentHints}
           getItemValue={(item) => item.name}
           onSelect={(value, item) => {
-            // TODO: need to dispatch the item as selected
             console.log("TALENT ITEM SECLTED: ", item);
+            this.updateFormData({
+            	talent_needed: [item]
+            })
           }}
           onChange={(event, value) => {
             // TODO: need to only dispatch a request to get

@@ -7,6 +7,7 @@ import postReducer from '../reducers/postReducer';
 import authedReducer from '../reducers/authReducer';
 import tagHintsReducer from '../reducers/tagHintsReducer';
 import talentHintsReducer from '../reducers/talentHintsReducer';
+import formReducer from '../reducers/formReducer';
 
 let createStoreWithMiddleware = applyMiddleware(promiseMiddleware, thunk)(createStore);
 
@@ -15,7 +16,8 @@ const reducer = combineReducers({
     posts: postReducer,
     user: authedReducer,
     tagHints: tagHintsReducer,
-    talentHints: talentHintsReducer
+    talentHints: talentHintsReducer,
+    formData: formReducer
 })
 
 const store = createStoreWithMiddleware(reducer);

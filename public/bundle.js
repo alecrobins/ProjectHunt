@@ -28342,6 +28342,10 @@
 
 	var talentHintsActions = _interopRequireWildcard(_talentHintsActions);
 
+	var _formActions = __webpack_require__(292);
+
+	var formActions = _interopRequireWildcard(_formActions);
+
 	var _reactAutocomplete = __webpack_require__(273);
 
 	var _reactAutocomplete2 = _interopRequireDefault(_reactAutocomplete);
@@ -28364,7 +28368,8 @@
 		return {
 			user: state.user,
 			tagHints: state.tagHints,
-			talentHints: state.talentHints
+			talentHints: state.talentHints,
+			formData: state.formData
 		};
 	}), _dec(_class = (function (_React$Component) {
 		_inherits(Form, _React$Component);
@@ -28402,6 +28407,25 @@
 				// TODO: need to reset all the temp features
 				// TODO: need to change the path to the home page
 			}
+
+			// updateFormData(...data){
+		}, {
+			key: 'updateFormData',
+			value: function updateFormData(formData) {
+
+				console.log("Update Form");
+				// const formData = {
+				// 	...this.props.formData
+				// 	"title": this._title.value,
+				// 	"tag_line": this._tagLine.value,
+				// 	"description": this._description.value,
+				// 	...data[0]
+				// }
+
+				// console.log(formData);
+
+				this.props.dispatch(formActions.setTempPostData(formData));
+			}
 		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {
@@ -28415,6 +28439,9 @@
 				// goto home if user is not logged in
 				if (!this.props.user.is_logged_in) this.props.dispatch(pushPath('/'));
 
+				console.log("Form Data: ");
+				console.log(this.props.formData);
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'form-container' },
@@ -28423,27 +28450,54 @@
 						{ htmlFor: 'title' },
 						'Title'
 					),
-					_react2.default.createElement('input', { type: 'text', name: 'title', ref: function ref(c) {
+					_react2.default.createElement('input', {
+						type: 'text',
+						name: 'title',
+						ref: function ref(c) {
 							return _this2._title = c;
-						} }),
+						},
+						onChange: function onChange() {
+							return _this2.updateFormData({
+								"title": _this2._title.value
+							});
+						}
+					}),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'label',
 						{ htmlFor: 'tagLine' },
 						'Tag Line'
 					),
-					_react2.default.createElement('input', { type: 'text', name: 'tagLine', ref: function ref(c) {
+					_react2.default.createElement('input', {
+						type: 'text',
+						name: 'tagLine',
+						ref: function ref(c) {
 							return _this2._tagLine = c;
-						} }),
+						},
+						onChange: function onChange() {
+							return _this2.updateFormData({
+								"tag_line": _this2._tagLine.value
+							});
+						}
+					}),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'label',
 						{ htmlFor: 'description' },
 						'Description'
 					),
-					_react2.default.createElement('textarea', { type: 'text', name: 'description', ref: function ref(c) {
+					_react2.default.createElement('textarea', {
+						type: 'text',
+						name: 'description',
+						ref: function ref(c) {
 							return _this2._description = c;
-						} }),
+						},
+						onChange: function onChange() {
+							return _this2.updateFormData({
+								"description": _this2._description.value
+							});
+						}
+					}),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'label',
@@ -28459,8 +28513,10 @@
 							return item.name;
 						},
 						onSelect: function onSelect(value, item) {
-							// TODO: need to dispatch the item as selected
 							console.log("ITEM SECLTED: ", item);
+							_this2.updateFormData({
+								tags: [item]
+							});
 						},
 						onChange: function onChange(event, value) {
 							// TODO: need to only dispatch a request to get
@@ -28491,8 +28547,10 @@
 							return item.name;
 						},
 						onSelect: function onSelect(value, item) {
-							// TODO: need to dispatch the item as selected
 							console.log("TALENT ITEM SECLTED: ", item);
+							_this2.updateFormData({
+								talent_needed: [item]
+							});
 						},
 						onChange: function onChange(event, value) {
 							// TODO: need to only dispatch a request to get
@@ -29528,6 +29586,10 @@
 
 	var _talentHintsReducer2 = _interopRequireDefault(_talentHintsReducer);
 
+	var _formReducer = __webpack_require__(291);
+
+	var _formReducer2 = _interopRequireDefault(_formReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_promiseMiddleware2.default, _reduxThunk2.default)(_redux.createStore);
@@ -29537,7 +29599,8 @@
 	    posts: _postReducer2.default,
 	    user: _authReducer2.default,
 	    tagHints: _tagHintsReducer2.default,
-	    talentHints: _talentHintsReducer2.default
+	    talentHints: _talentHintsReducer2.default,
+	    formData: _formReducer2.default
 	});
 
 	var store = createStoreWithMiddleware(reducer);
@@ -30198,6 +30261,71 @@
 			default:
 				return state;
 		}
+	}
+
+/***/ },
+/* 291 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = formReducer;
+	function formReducer() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? {
+			tags: [],
+			talent_needed: []
+		} : arguments[0];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'SET_USER_TYPING':
+				return _extends({}, state, {
+					userIsTyping: action.isTyping
+				});
+			case 'SET_TEMP_POST_DATA':
+				return _extends({}, state, action.formData);
+			default:
+				return state;
+		}
+	}
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.setTempPostData = setTempPostData;
+	exports.setUserTyping = setUserTyping;
+
+	var _axios = __webpack_require__(239);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _config = __webpack_require__(257);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function setTempPostData(formData) {
+	  return {
+	    type: 'SET_TEMP_POST_DATA',
+	    formData: formData
+	  };
+	}
+
+	function setUserTyping(isTyping) {
+	  return {
+	    type: 'SET_USER_TYPING',
+	    isTyping: isTyping
+	  };
 	}
 
 /***/ }
