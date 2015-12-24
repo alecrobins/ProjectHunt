@@ -125,7 +125,7 @@
 
 
 	// module
-	exports.push([module.id, "html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font:inherit;font-size:100%;vertical-align:baseline}html{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}q,blockquote{quotes:none}q:before,q:after,blockquote:before,blockquote:after{content:\"\";content:none}a img{border:none}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}*{margin:0;padding:0;border:none;outline:none;font-family:'Open sans', san serif}html,html a{-webkit-font-smoothing:antialiased !important;text-shadow:1px 1px 1px rgba(0,0,0,0.004)}body{background:white;font-family:'Open sans', sans-serif}.-clear:after{content:\"\";display:block;clear:both}.contianer{padding-top:20px}.h1{font-weight:600;font-size:28px}.h1__title{font-weight:600;font-size:28px;color:#252525;margin-bottom:15px}.h2{font-weight:500;font-size:16px}.h2__tagline{font-weight:500;font-size:16px;color:#525252;margin-bottom:15px}.h3__login{font-weight:900;font-size:18px;color:white;text-transform:uppercase;letter-spacing:40px}.h3__likes{font-weight:600;font-size:14px;color:#525252}.h4{font-weight:700;font-size:12px;color:#525252;text-transform:uppercase}.h4__icon{font-weight:700;font-size:12px;color:white;text-transform:uppercase}.h5__date{font-weight:500;font-size:13px;color:#252525;text-transform:uppercase;letter-spacing:60px}.p__main{font-weight:300;color:#252525;font-size:14px;line-height:28px}.nav-container--outer{background:#02edda;width:100%}.nav-container--inner{display:block;position:relative;padding:20px;max-width:1080px;margin:0 auto}.nav-searchbar{display:block;position:absolute;width:40%;left:30%}.nav-login{float:right}.nav-logo{float:left;max-width:140px}h3.nav-container--login{color:white;text-transform:uppercase;font-size:14px;font-weight:900;letter-spacing:3px}.post-list--container{max-width:960px;margin:0 auto}.post-container--outer{padding:20px}.post-container--inner{display:-webkit-flex;display:flex}.post-social{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;margin-right:40px}.post-content{width:45%}.post-content__author{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-bottom:15px}.post-content__author .profile{width:30px;margin-right:10px;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;border-radius:50%}.post-content__author .h4{display:-webkit-inline-flex;display:inline-flex;margin-right:10px}.post-img{width:45%;position:relative;display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;-webkit-align-items:flex-start;align-items:flex-start;padding:0 20px}.post-img__feature{width:100%}.like-caret{margin-bottom:5px}.tag{display:-webkit-inline-flex;display:inline-flex;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;border-radius:5px;padding:4px 7px;font-weight:700;font-size:12px;color:white;text-transform:uppercase;margin-right:5px}\n", ""]);
+	exports.push([module.id, "html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font:inherit;font-size:100%;vertical-align:baseline}html{line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}q,blockquote{quotes:none}q:before,q:after,blockquote:before,blockquote:after{content:\"\";content:none}a img{border:none}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}*{margin:0;padding:0;border:none;outline:none;font-family:'Open sans', san serif}html,html a{-webkit-font-smoothing:antialiased !important;text-shadow:1px 1px 1px rgba(0,0,0,0.004)}body{background:white;font-family:'Open sans', sans-serif}.-clear:after{content:\"\";display:block;clear:both}.contianer{padding-top:20px}.h1{font-weight:600;font-size:28px}.h1__title{font-weight:600;font-size:28px;color:#252525;margin-bottom:15px}.h2{font-weight:500;font-size:16px}.h2__tagline{font-weight:500;font-size:16px;color:#525252;margin-bottom:15px}.h3__login{font-weight:900;font-size:18px;color:white;text-transform:uppercase;letter-spacing:40px}.h3__likes{font-weight:600;font-size:14px;color:#525252}.h4{font-weight:700;font-size:12px;color:#525252;text-transform:uppercase}.h4__icon{font-weight:700;font-size:12px;color:white;text-transform:uppercase}.h5__date{font-weight:500;font-size:13px;color:#252525;text-transform:uppercase;letter-spacing:60px}.p__main{font-weight:300;color:#252525;font-size:14px;line-height:28px}.nav-container--outer{background:#02edda;width:100%}.nav-container--inner{display:block;position:relative;padding:20px;max-width:1080px;margin:0 auto}.nav-searchbar{display:block;position:absolute;width:40%;left:30%}.nav-login{float:right}.nav-logo{float:left;max-width:140px}h3.nav-container--login{color:white;text-transform:uppercase;font-size:14px;font-weight:900;letter-spacing:3px}.post-list--container{max-width:960px;margin:0 auto}.post-container--outer{padding:20px}.post-container--inner{display:-webkit-flex;display:flex}.post-social{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;-webkit-align-items:center;align-items:center;margin-right:40px}.post-content{width:45%}.post-content__author{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;margin-bottom:15px}.post-content__author .profile{width:30px;margin-right:10px;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;border-radius:50%}.post-content__author .h4{display:-webkit-inline-flex;display:inline-flex;margin-right:10px}.post-img{width:45%;position:relative;display:-webkit-flex;display:flex;-webkit-justify-content:center;justify-content:center;-webkit-align-items:flex-start;align-items:flex-start;padding:0 20px}.post-img__feature{width:100%}.like-caret{margin-bottom:5px}.tag{display:-webkit-inline-flex;display:inline-flex;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;border-radius:5px;padding:4px 7px;font-weight:700;font-size:12px;color:white;text-transform:uppercase;margin-right:5px}.form-container input,.form-container textarea{background:#f8f8f8}\n", ""]);
 
 	// exports
 
@@ -27705,18 +27705,20 @@
 						_react2.default.createElement(
 							'div',
 							{ className: 'post-content__author' },
-							_react2.default.createElement('img', { src: '/assets/imgs/profile.jpg', alt: 'Profile picture', className: 'profile' }),
+							_react2.default.createElement('img', { src: this.props.post_author.photo_url, alt: 'Profile picture', className: 'profile' }),
 							_react2.default.createElement(
 								'h4',
 								{ className: 'h4' },
-								'Alec Robins'
+								this.props.post_author.name
 							),
 							_react2.default.createElement(_Talent2.default, { talent: 'Biz Dev', color: '#00D5FF' })
 						),
 						_react2.default.createElement(
 							'p',
 							{ className: 'p__main' },
-							'Apester was started by @MotiCohen in order to challenge the current way content was being consumed by audiences. He set out to change the unilateral conversation that was being had between content creators and content consumers.'
+							' ',
+							this.props.description,
+							' '
 						)
 					),
 					_react2.default.createElement(
@@ -27923,6 +27925,8 @@
 
 	var _reactRedux = __webpack_require__(216);
 
+	var _reduxSimpleRouter = __webpack_require__(234);
+
 	var _uiActions = __webpack_require__(263);
 
 	var uiActions = _interopRequireWildcard(_uiActions);
@@ -27961,6 +27965,8 @@
 		_createClass(NavBar, [{
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				// <button onClick={() => this.props.dispatch(uiActions.loginClicked())}>
 				var login = this.props.user.is_logged_in ? _react2.default.createElement(_NavBarUser2.default, this.props) : _react2.default.createElement(
 					'a',
@@ -27971,7 +27977,13 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'nav-container--inner -clear' },
-					_react2.default.createElement('img', { src: 'assets/imgs/logo.png', alt: 'Project Hunt Logo', className: 'nav-logo' }),
+					_react2.default.createElement('img', {
+						src: 'assets/imgs/logo.png',
+						alt: 'Project Hunt Logo',
+						className: 'nav-logo',
+						onClick: function onClick() {
+							return _this2.props.dispatch((0, _reduxSimpleRouter.pushPath)('/'));
+						} }),
 					_react2.default.createElement(_SearchBar2.default, null),
 					_react2.default.createElement(
 						'div',
@@ -28380,7 +28392,7 @@
 
 				return _react2.default.createElement(
 					'div',
-					{ className: 'form-contianer' },
+					{ className: 'form-container' },
 					_react2.default.createElement(
 						'label',
 						{ htmlFor: 'title' },
@@ -28389,6 +28401,7 @@
 					_react2.default.createElement('input', { type: 'text', name: 'title', ref: function ref(c) {
 							return _this2._title = c;
 						} }),
+					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'label',
 						{ htmlFor: 'tagLine' },
@@ -28397,13 +28410,41 @@
 					_react2.default.createElement('input', { type: 'text', name: 'tagLine', ref: function ref(c) {
 							return _this2._tagLine = c;
 						} }),
+					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'label',
 						{ htmlFor: 'description' },
-						'Tag Line'
+						'Description'
 					),
 					_react2.default.createElement('textarea', { type: 'text', name: 'description', ref: function ref(c) {
 							return _this2._description = c;
+						} }),
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'talentNeeded' },
+						'Talent Needed'
+					),
+					_react2.default.createElement('input', { type: 'text', name: 'talentNeeded', ref: function ref(c) {
+							return _this2._talentNeeded = c;
+						} }),
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'tags' },
+						'Tags'
+					),
+					_react2.default.createElement('input', { type: 'text', name: 'tags', ref: function ref(c) {
+							return _this2._tags = c;
+						} }),
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(
+						'label',
+						{ htmlFor: 'imgs' },
+						'Upload images'
+					),
+					_react2.default.createElement('input', { type: 'file', name: 'imgs', ref: function ref(c) {
+							return _this2._imgs = c;
 						} }),
 					_react2.default.createElement(
 						'button',

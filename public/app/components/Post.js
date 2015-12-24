@@ -18,14 +18,12 @@ class Post extends React.Component {
 					<h2 className="h2__tagline">{this.props.tag_line}</h2>
 					
 					<div className="post-content__author">
-						<img src="/assets/imgs/profile.jpg" alt="Profile picture" className="profile" />
-						<h4 className="h4">Alec Robins</h4>
+						<img src={this.props.post_author.photo_url} alt="Profile picture" className="profile" />
+						<h4 className="h4">{this.props.post_author.name}</h4>
 						<Talent talent="Biz Dev" color="#00D5FF" />
 					</div>
 
-					<p className="p__main">
-						Apester was started by @MotiCohen in order to challenge the current way content was being consumed by audiences. He set out to change the unilateral conversation that was being had between content creators and content consumers.
-					</p>
+					<p className="p__main"> {this.props.description} </p>
 
 				</div>
 				

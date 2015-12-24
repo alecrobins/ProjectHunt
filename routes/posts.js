@@ -21,23 +21,31 @@ module.exports.getPosts = function (req, res, next) {
 
 // POST '/api/posts'
 module.exports.add = function (req, res, next) {
-	if (req.body) {
+	if(req.body){
+ 		var curUser = req.session.passport.user;
+ 		var postData = req.body;
 		// create a new post
 		req.db.Post.create({
-			"post_author": req.session.passport.user._id,
-			"title": req.body.title,
-			"tag_line": req.body.tag_line,
-			"description": req.body.description,
-			"talent_needed": req.body.talent_needed || null,
-			"tags": req.body.tags || null,
-			"feature_img": req.body.feature_img || null,
-			"imgs": req.body.imgs || null,
-			"contact": req.body.contact != null ?
+			"post_author": {
+				id: curUser._id,
+				name: curUser.name,
+				photo_url: curUser.photo_url,
+				bio: curUser.bio,
+				talent: curUser.talent
+			},
+			"title": postData.title,
+			"tag_line": postData.tag_line,
+			"description": postData.description,
+			"talent_needed": postData.talent_needed || null,
+			"tags": postData.tags || null,
+			"feature_img": postData.feature_img || null,
+			"imgs": postData.imgs || null,
+			"contact": postData.contact != null ?
 				{
-					"email": req.body.contact.email || null,
-					"phone": req.body.contact.phone || null,
-					"github": req.body.contact.github || null,
-					"website": req.body.contact.website || null
+					"email": postData.contact.email || null,
+					"phone": postData.contact.phone || null,
+					"github": postData.contact.github || null,
+					"website": postData.contact.website || null
 				} : null
 		}, function(err, result){
 			if (err) next(err);

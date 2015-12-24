@@ -39,15 +39,24 @@ class Form extends React.Component{
 			this.props.dispatch(pushPath('/'));
 
 		return (
-			<div className="form-contianer">
+			<div className="form-container">
 				<label htmlFor="title">Title</label>
-				<input type="text" name="title" ref={(c) => this._title = c} />
+				<input type="text" name="title" ref={(c) => this._title = c} /><br />
 				
 				<label htmlFor="tagLine">Tag Line</label>
-				<input type="text" name="tagLine" ref={(c) => this._tagLine = c} />
+				<input type="text" name="tagLine" ref={(c) => this._tagLine = c} /><br />
 
-				<label htmlFor="description">Tag Line</label>
-				<textarea type="text" name="description" ref={(c) => this._description = c} />
+				<label htmlFor="description">Description</label>
+				<textarea type="text" name="description" ref={(c) => this._description = c} /><br />
+
+				<label htmlFor="talentNeeded">Talent Needed</label>
+				<input type="text" name="talentNeeded" ref={(c) => this._talentNeeded = c} /><br />
+
+				<label htmlFor="tags">Tags</label>
+				<input type="text" name="tags" ref={(c) => this._tags = c} /><br />
+
+				<label htmlFor="imgs">Upload images</label>
+				<input type="file" name="imgs" ref={(c) => this._imgs = c} /> 
 
 				<button onClick={() => this.submitForm()}>Submit</button>
 			</div>

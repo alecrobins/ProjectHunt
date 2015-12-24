@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { pushPath } from 'redux-simple-router'
 import * as uiActions from '../actions/uiActions'
 import SearchBar from './SearchBar'
 import NavBarUser from './NavBarUser'
@@ -20,7 +21,11 @@ class NavBar extends React.Component {
 
 		return (
 			<div className="nav-container--inner -clear">
-				<img src="assets/imgs/logo.png" alt="Project Hunt Logo" className="nav-logo" />
+				<img
+					src="assets/imgs/logo.png"
+					alt="Project Hunt Logo"
+					className="nav-logo"
+					onClick={() => this.props.dispatch(pushPath('/'))} />
 				<SearchBar />
 				<div className="nav-login">
 					{login}
