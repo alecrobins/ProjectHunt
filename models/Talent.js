@@ -19,6 +19,6 @@ var TalentSchema = new mongoose.Schema({
 	}
 });
 
-TalentSchema.index({name: 1});
+TalentSchema.index({name: 'text'});
 
 exports.schema = TalentSchema;

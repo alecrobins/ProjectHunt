@@ -13,7 +13,14 @@ module.exports.like = function(req, res, next){
 			},
 			{
 				$inc: {"like_count": 1},
-				$push: {"likes": req.session.passport.user._id}
+				$push: {"likes":
+					{
+						id: req.session.passport.user._id,
+						name: req.session.passport.user.name,
+						photo_url: req.session.passport.user.photo_url,
+						bio: req.session.passport.user.bio
+					}
+				}
 			},
 			function(err, obj){
 				if(err) next(err);

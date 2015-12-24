@@ -80,15 +80,12 @@ module.exports = function(app, connection) {
 	// TODO: add a route for uploading images or videos
 
 	// TALENT
-	//TODO: need to add routes:
-	// - add new talent
-	// - search posts that contain talents
+	app.post('/api/talent', db, routes.talent.addTalent);
+	app.get('/api/talent/:query', db, routes.talent.searchTalent);
 
 	// TAG
-	//TODO: need to add routes:
-	// - add new tag
-	// - delete tag
-	// - search posts that contain talents
+	app.post('/api/tag', db, routes.tags.addTag);
+	app.get('/api/tag/:query', db, routes.tags.searchTag);
 
 	// ACTIONS
 	app.post('/api/actions/like', isLoggedIn, db, routes.actions.like);

@@ -49,12 +49,29 @@ module.exports.add = function (req, res, next) {
 				} : null
 		}, function(err, result){
 			if (err) next(err);
-	      res.json(result);
+			updateCount(req.db.Tag, result.tags);
+			updateTalent(req.db.Talent, result.talent_needed);
+	    res.json(result);
 		});
 	}else{
 		next(new Error('No data'));
 	}
 }
+
+// 
+function updateCount(Schema, field){
+	// increment the tag count by 1
+	for(var i = 0; i < field.length; ++i){
+		var cur = field[i];
+		Schema.findOneAndUpdate(
+			{ "_id": cur.id },
+			{$inc: {"count": 1 } },
+			function(err, obj){
+				if(err) next(err);
+			})
+	}
+}
+
 
 // GET '/api/posts/:id'
 module.exports.getPost = function (req, res, next) {

@@ -26,15 +26,18 @@ var PostSchema = new mongoose.Schema({
 				type: Schema.Types.ObjectId,
 				ref: 'Talent'
 			},
-			name: {
-				type: String
-			}
+			name: { type: String }
  		}]
  	},
  	"likes": [{
-   	type: Schema.Types.ObjectId,
-   	ref: 'User'
-  	}],
+ 		id: {
+	   	type: Schema.Types.ObjectId,
+	   	ref: 'User'
+	  },
+	  name: { type: String },
+	  photo_url: { type: String },
+	  bio: { type: String }
+	}],
 	"like_count":{
 		type: Number,
 		default: 0
@@ -62,13 +65,22 @@ var PostSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
-	"talent_needed": [{
-		type: Schema.Types.ObjectId,
-		ref: 'Talent'
+	"talent_needed": [
+		{
+			id: {
+				type: Schema.Types.ObjectId,
+				ref: 'Talent'
+			},
+			name: {type: String},
+			color: {type: String}
 	}],
 	"tags": [{
-		type: Schema.Types.ObjectId,
-		ref: 'Tag'
+		id: {
+			type: Schema.Types.ObjectId,
+			ref: 'Tag'
+		},
+		name: {type: String},
+		icon: {stype: String}
 	}],
 	// "location": {
 	// 	type: String,

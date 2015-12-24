@@ -1,13 +1,13 @@
 // Post Monogo Schemea 
 var mongoose = require('mongoose');
-var randomColor = require('randomcolor');
 var Schema = mongoose.Schema;
 
 var TagSchema = new mongoose.Schema({
  	"name": {
  		type: String,
  		max: 1000,
- 		unique: true
+ 		unique: true,
+ 		require: true
  	},
  	"count": {
  		type: Number,
@@ -20,6 +20,6 @@ var TagSchema = new mongoose.Schema({
 	}
 });
 
-TagSchema.index({name: 1});
+TagSchema.index({name: 'text'});
 
 exports.schema = TagSchema;
