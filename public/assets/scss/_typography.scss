@@ -7,7 +7,7 @@
 	font-weight: 600;
 	font-size: 28px;
 	color: $main-grey;
-	margin-bottom: $default-margin / 2;
+	margin-bottom: 15px;
 }
 
 .h2 {
@@ -19,7 +19,7 @@
 	font-weight: 500;
 	font-size: 16px;
 	color: $secondary-grey;
-	margin-bottom: $default-margin / 2;
+	margin-bottom: 15px;
 }
 
 .h3__login {
@@ -31,14 +31,9 @@
 }
 
 .h3__likes {
-	font-weight: 700;
+	font-weight: 600;
 	font-size: 14px;
-	color: $secondary-grey
-
-	&-active{
-		font-weight: 900;
-		color: $main-grey;
-	}
+	color: $secondary-grey;
 }
 
 .h4 {
@@ -65,7 +60,7 @@
 
 .p__main {
 	font-weight: 300;
-	font-size: 12px;
 	color: $main-grey;
-	line-height: 24px;
+  font-size: 14px;
+  line-height: 28px;
 }

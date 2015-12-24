@@ -1,9 +1,10 @@
 .tag {
-	display: inline-block;
-	@include border-radius(3px);
-	padding: 3px 5px;
+	@include display-flex(inline-flex);
+	@include border-radius(5px);
+	padding: 4px 7px;
 	font-weight: 700;
 	font-size: 12px;
 	color: white;
-	text-transform: uppercase;	
+	text-transform: uppercase;
+	margin-right: $default-margin / 4;
 }

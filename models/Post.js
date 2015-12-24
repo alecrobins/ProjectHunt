@@ -5,9 +5,31 @@ var Schema = mongoose.Schema;
 
 var PostSchema = new mongoose.Schema({
  	"post_author": {
- 		required: true,
- 		type: Schema.Types.ObjectId,
- 		ref: 'User'
+ 		id: {
+	 		required: true,
+	 		type: Schema.Types.ObjectId,
+	 		ref: 'User'	
+ 		},
+ 		name: {
+ 			required: true,
+ 			type: String
+ 		},
+ 		photo_url: {
+ 			required: true,
+ 			type: String
+ 		},
+ 		bio: {
+ 			type: String
+ 		},
+ 		talent: [{
+	 		id: {
+				type: Schema.Types.ObjectId,
+				ref: 'Talent'
+			},
+			name: {
+				type: String
+			}
+ 		}]
  	},
  	"likes": [{
    	type: Schema.Types.ObjectId,

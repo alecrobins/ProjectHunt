@@ -33,8 +33,13 @@ var UserSchema = new mongoose.Schema({
 		max: 1000
 	},
 	"talent": [{
-		type: Schema.Types.ObjectId,
-		ref: 'Talent'
+		id: {
+			type: Schema.Types.ObjectId,
+			ref: 'Talent'
+		},
+		name: {
+			type: String
+		}
 	}],
 	"facebook":{
 		"id": String,

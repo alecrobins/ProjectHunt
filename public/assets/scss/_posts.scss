@@ -1,5 +1,5 @@
 .post-list--container {
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -12,5 +12,48 @@
 }
 
 .post-social{
-	margin-right: $default-margin;
+	@include display-flex;
+  @include flex-direction(column);
+  @include align-items(center);
+	margin-right: $default-margin * 2;
+}
+
+.post-content{
+	width: 45%;
+}
+
+.post-content__author {
+	@include display-flex;
+	@include align-items(center);
+	margin-bottom: 15px;
+
+	.profile {
+		width: 30px;
+		margin-right: $default-margin / 2;
+		@include border-radius(50%);
+	}
+
+	.h4 {
+		@include display-flex(inline-flex);
+		margin-right: $default-margin / 2;
+	}
+
+}
+
+.post-img {
+	width: 45%;
+	position: relative;
+	@include display-flex;
+	@include justify-content(center);
+	@include align-items(flex-start);
+	padding: 0 $default-padding;
+	
+	&__feature {
+		width: 100%;
+	}
+
+}
+
+.like-caret {
+	margin-bottom: 5px;
 }
