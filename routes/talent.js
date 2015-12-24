@@ -24,6 +24,9 @@ module.exports.searchTalent = function(req, res, next){
       { name: {$regex: regex }}
 		)
  		.limit(5)
+ 		.sort({
+ 			"count": -1
+ 		})
 		.exec(function(err, results) {
 			if(err) next(err);
 			res.json(results);

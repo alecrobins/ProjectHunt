@@ -20,7 +20,6 @@ module.exports = function(app, connection) {
 	function isLoggedIn(req, res, next) {
 		// if user is authenticated in the session, carry on
 		if (req.isAuthenticated()) return next();
-
 		res.sendStatus(401);
 	}
 
@@ -57,7 +56,6 @@ module.exports = function(app, connection) {
 		}));
 
 	app.get('/api/logout', function(req, res, next) {
-
 		req.logout();
 		console.info('Logout USER: ' + req.session.userId);
 

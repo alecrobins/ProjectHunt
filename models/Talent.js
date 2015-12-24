@@ -1,6 +1,5 @@
 // Post Monogo Schemea 
 var mongoose = require('mongoose');
-var randomColor = require('randomcolor');
 var Schema = mongoose.Schema;
 
 var TalentSchema = new mongoose.Schema({
@@ -15,7 +14,7 @@ var TalentSchema = new mongoose.Schema({
  	},
 	"color": {
 		type: String,
-		default: randomColor({ luminosity: 'bright' })
+		default: "000000"
 	}
 });
 

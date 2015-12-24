@@ -58,7 +58,7 @@ module.exports.add = function (req, res, next) {
 	}
 }
 
-// 
+// update the count on tag/talent when used to improve search
 function updateCount(Schema, field){
 	// increment the tag count by 1
 	for(var i = 0; i < field.length; ++i){
