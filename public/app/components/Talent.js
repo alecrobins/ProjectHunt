@@ -5,5 +5,5 @@ export default (props) => {
 	const style = {
 		"background": props.color
 	}
-	return <div className="tag talent" style={style}>{props.talent}</div>
+	return <div className="tag talent" onClick={props.handleClick} style={style}>{props.talent}</div>
 }

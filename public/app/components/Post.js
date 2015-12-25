@@ -6,7 +6,16 @@ import Talent from './Talent';
 class Post extends React.Component {
 
 	render() {
-		// <p className="p__main">{this.props.description}</p>
+		<p className="p__main">{this.props.description}</p>
+		var talents;
+		if(this.props.talent_needed){
+			talents = this.props.talent_needed.map((talent, index) => (
+							<Talent key={talent._id} talent={talent.name} color={talent.color} />
+						));
+		}else {
+			talents = <p>NO TALENTS</p>;
+		}
+
 		return (
 			<div className="post-container--inner">
 				
@@ -24,6 +33,11 @@ class Post extends React.Component {
 					</div>
 
 					<p className="p__main"> {this.props.description} </p>
+					
+					<div className="post__talent_needed">
+						{talents}
+					</div>
+
 
 				</div>
 				

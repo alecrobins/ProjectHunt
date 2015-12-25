@@ -26,7 +26,8 @@ var PostSchema = new mongoose.Schema({
 				type: Schema.Types.ObjectId,
 				ref: 'Talent'
 			},
-			name: { type: String }
+			name: { type: String },
+			color: { type: String }
  		}]
  	},
  	"likes": [{
@@ -67,7 +68,7 @@ var PostSchema = new mongoose.Schema({
 	},
 	"talent_needed": [
 		{
-			id: {
+			_id: {
 				type: Schema.Types.ObjectId,
 				ref: 'Talent'
 			},
@@ -75,12 +76,12 @@ var PostSchema = new mongoose.Schema({
 			color: {type: String}
 	}],
 	"tags": [{
-		id: {
+		_id: {
 			type: Schema.Types.ObjectId,
 			ref: 'Tag'
 		},
 		name: {type: String},
-		icon: {stype: String}
+		icon: {type: String}
 	}],
 	// "location": {
 	// 	type: String,

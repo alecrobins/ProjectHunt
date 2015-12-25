@@ -15,6 +15,7 @@ module.exports.getPosts = function (req, res, next) {
 	    	// lean: true
 	  	}, function(err, results) {
 			if(err) next(err);
+			console.log(results);
 			res.json(results);
 		});
 }
@@ -24,7 +25,7 @@ module.exports.add = function (req, res, next) {
 	if(req.body){
  		var curUser = req.session.passport.user;
  		var postData = req.body;
-		// create a new post
+
 		req.db.Post.create({
 			"post_author": {
 				id: curUser._id,
@@ -50,7 +51,7 @@ module.exports.add = function (req, res, next) {
 		}, function(err, result){
 			if (err) next(err);
 			updateCount(req.db.Tag, result.tags);
-			updateTalent(req.db.Talent, result.talent_needed);
+			updateCount(req.db.Talent, result.talent_needed);
 	    res.json(result);
 		});
 	}else{
@@ -64,7 +65,7 @@ function updateCount(Schema, field){
 	for(var i = 0; i < field.length; ++i){
 		var cur = field[i];
 		Schema.findOneAndUpdate(
-			{ "_id": cur.id },
+			{ "_id": cur._id },
 			{$inc: {"count": 1 } },
 			function(err, obj){
 				if(err) next(err);

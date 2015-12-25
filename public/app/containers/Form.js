@@ -20,50 +20,22 @@ import Talent from '../components/Talent';
 class Form extends React.Component{
 	
 	submitForm(){
-		console.log("Submitting the form");
-		
-		const postData = {
-			"title": this._title.value,
-			"tag_line": this._tagLine.value,
-			"description": this._description.value,
-			// "talent_needed": req.body.talent_needed || null,
-			// "tags": req.body.tags || null,
-			// "feature_img": req.body.feature_img || null,
-			// "imgs": req.body.imgs || null,
-			// "contact": req.body.contact != null ?
-			// 	{
-			// 		"email": req.body.contact.email || null,
-			// 		"phone": req.body.contact.phone || null,
-			// 		"github": req.body.contact.github || null,
-			// 		"website": req.body.contact.website || null
-			// 	}
-		}
-
-		// submit the post
-		this.props.dispatch(postActions.createPost(postData));
-		// TODO: need to reset all the temp features
-		// TODO: need to change the path to the home page
+		// submit the post and reset the form data
+		this.props.dispatch(postActions.createPost(this.props.formData));
+		// TODO: BAD doens't confirm it was posted correctly
+		// 			need to create a state saying that post was successfully posted
+		this.props.dispatch(formActions.resetFormState()) 
 	}
 	
 	// updateFormData(...data){
 	updateFormData(formData){
-		
 		console.log("Update Form");
-		// const formData = {
-		// 	...this.props.formData
-		// 	"title": this._title.value,
-		// 	"tag_line": this._tagLine.value,
-		// 	"description": this._description.value,
-		// 	...data[0]
-		// }
-
-		// console.log(formData);
-
 		this.props.dispatch(formActions.setTempPostData(formData));
 	}
 
 	componentWillUnmount() {
-		// TODO: need to reset all the temp features
+		// reset the form data when unmounted
+		this.props.dispatch(formActions.resetFormState())
 	}
 
 	render() {
@@ -113,14 +85,9 @@ class Form extends React.Component{
           getItemValue={(item) => item.name}
           onSelect={(value, item) => {
             console.log("ITEM SECLTED: ", item);
-            this.updateFormData({
-            	tags: [item]
-            })
+            this.props.dispatch(formActions.addTempTag(item));
           }}
           onChange={(event, value) => {
-            // TODO: need to only dispatch a request to get
-            // hints only if stopped typing
-            console.log("AUTOCOMPELETE CHANGING: ");
 						this.props.dispatch(tagHintsActions.getTagHints(value));
           }}
           renderItem={(item, isHighlighted) => {
@@ -131,23 +98,28 @@ class Form extends React.Component{
             	</div>
             )
           }}
-        /> <br />
+        />
+        <div className="form-talents">
+					{this.props.formData.tags.map((item, index) => (
+						<h3
+							key={item._id}
+							onClick={() => {
+								this.props.dispatch(formActions.removeTempTag(item, index))
+							}}>
+						{item.name}
+					</h3>))}
+        </div>
+        <br />
 
-				<label htmlFor="tags">Talent Needed</label>
+				<label htmlFor="talents">Talent Needed</label>
 				<Autocomplete
           // ref="talentNeeded"
           items={this.props.talentHints}
           getItemValue={(item) => item.name}
           onSelect={(value, item) => {
-            console.log("TALENT ITEM SECLTED: ", item);
-            this.updateFormData({
-            	talent_needed: [item]
-            })
+          	this.props.dispatch(formActions.addTempTalent(item))
           }}
           onChange={(event, value) => {
-            // TODO: need to only dispatch a request to get
-            // hints only if stopped typing
-            console.log("TALENT AUTOCOMPELETE CHANGING: ");
 						this.props.dispatch(talentHintsActions.getTalentHints(value));
           }}
           renderItem={(item, isHighlighted) => {
@@ -160,15 +132,39 @@ class Form extends React.Component{
             		color={item.color} />
             )
           }}
-        /> <br />
+        />
+        <div className="form-talents">
+					{this.props.formData.talent_needed.map((item, index) => (
+						<Talent
+							key={item._id}
+							talent={item.name}
+							color={item.color} 
+							handleClick={() => {
+								this.props.dispatch(formActions.removeTempTalent(item, index))
+							}}
+						/>
+					))}
+        </div>
+        <br />
 
 				<label htmlFor="imgs">Upload images</label>
 				<input type="file" name="imgs" ref={(c) => this._imgs = c} /> 
 
 				<button onClick={() => this.submitForm()}>Submit</button>
+				<button
+					onClick={() => {
+						this.props.dispatch(formActions.resetFormState())
+					}}>
+						Reset
+				</button>
 			</div>
 		)
 	}
 }
 
+/*<Talent
+	key={item._id}
+	talent={item.name}
+	color={item.color} />
+*/
 export default Form;

@@ -64,11 +64,11 @@
 
 	var _reactRedux = __webpack_require__(216);
 
-	var _store = __webpack_require__(278);
+	var _store = __webpack_require__(279);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _history = __webpack_require__(284);
+	var _history = __webpack_require__(287);
 
 	var _reduxSimpleRouter = __webpack_require__(234);
 
@@ -24853,19 +24853,19 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Main = __webpack_require__(261);
+	var _Main = __webpack_require__(259);
 
 	var _Main2 = _interopRequireDefault(_Main);
 
-	var _Profile = __webpack_require__(269);
+	var _Profile = __webpack_require__(267);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
-	var _ProfileEdit = __webpack_require__(270);
+	var _ProfileEdit = __webpack_require__(268);
 
 	var _ProfileEdit2 = _interopRequireDefault(_ProfileEdit);
 
-	var _Form = __webpack_require__(271);
+	var _Form = __webpack_require__(269);
 
 	var _Form2 = _interopRequireDefault(_Form);
 
@@ -27656,11 +27656,11 @@
 
 	var _reactRedux = __webpack_require__(216);
 
-	var _PostSocial = __webpack_require__(259);
+	var _PostSocial = __webpack_require__(292);
 
 	var _PostSocial2 = _interopRequireDefault(_PostSocial);
 
-	var _Talent = __webpack_require__(260);
+	var _Talent = __webpack_require__(278);
 
 	var _Talent2 = _interopRequireDefault(_Talent);
 
@@ -27684,7 +27684,24 @@
 		_createClass(Post, [{
 			key: 'render',
 			value: function render() {
-				// <p className="p__main">{this.props.description}</p>
+				_react2.default.createElement(
+					'p',
+					{ className: 'p__main' },
+					this.props.description
+				);
+				var talents;
+				if (this.props.talent_needed) {
+					talents = this.props.talent_needed.map(function (talent, index) {
+						return _react2.default.createElement(_Talent2.default, { key: talent._id, talent: talent.name, color: talent.color });
+					});
+				} else {
+					talents = _react2.default.createElement(
+						'p',
+						null,
+						'NO TALENTS'
+					);
+				}
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'post-container--inner' },
@@ -27719,6 +27736,11 @@
 							' ',
 							this.props.description,
 							' '
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'post__talent_needed' },
+							talents
 						)
 					),
 					_react2.default.createElement(
@@ -27745,97 +27767,6 @@
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(5);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(216);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var PostSocial = (function (_React$Component) {
-		_inherits(PostSocial, _React$Component);
-
-		function PostSocial() {
-			_classCallCheck(this, PostSocial);
-
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(PostSocial).apply(this, arguments));
-		}
-
-		_createClass(PostSocial, [{
-			key: 'render',
-			value: function render() {
-				var _this2 = this;
-
-				return _react2.default.createElement(
-					'div',
-					{ className: 'post-social' },
-					_react2.default.createElement('i', { className: 'fa fa-caret-up like-caret', onClick: function onClick() {
-							return _this2.props.likePost();
-						} }),
-					_react2.default.createElement(
-						'h3',
-						{ className: 'h3__likes' },
-						this.props.like_count
-					)
-				);
-			}
-		}]);
-
-		return PostSocial;
-	})(_react2.default.Component);
-
-	;
-
-	exports.default = PostSocial;
-
-/***/ },
-/* 260 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(5);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(216);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (props) {
-		var style = {
-			"background": props.color
-		};
-		return _react2.default.createElement(
-			'div',
-			{ className: 'tag talent', style: style },
-			props.talent
-		);
-	};
-
-/***/ },
-/* 261 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 	var _dec, _class;
 
 	Object.defineProperty(exports, "__esModule", {
@@ -27848,11 +27779,11 @@
 
 	var _reactRedux = __webpack_require__(216);
 
-	var _NavBar = __webpack_require__(262);
+	var _NavBar = __webpack_require__(260);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _authed = __webpack_require__(267);
+	var _authed = __webpack_require__(265);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27906,7 +27837,7 @@
 	exports.default = Main;
 
 /***/ },
-/* 262 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27927,15 +27858,15 @@
 
 	var _reduxSimpleRouter = __webpack_require__(234);
 
-	var _uiActions = __webpack_require__(263);
+	var _uiActions = __webpack_require__(261);
 
 	var uiActions = _interopRequireWildcard(_uiActions);
 
-	var _SearchBar = __webpack_require__(265);
+	var _SearchBar = __webpack_require__(263);
 
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 
-	var _NavBarUser = __webpack_require__(266);
+	var _NavBarUser = __webpack_require__(264);
 
 	var _NavBarUser2 = _interopRequireDefault(_NavBarUser);
 
@@ -27999,7 +27930,7 @@
 	exports.default = NavBar;
 
 /***/ },
-/* 263 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28015,7 +27946,7 @@
 
 	var _config = __webpack_require__(257);
 
-	var _uiConstants = __webpack_require__(264);
+	var _uiConstants = __webpack_require__(262);
 
 	var types = _interopRequireWildcard(_uiConstants);
 
@@ -28030,7 +27961,7 @@
 	}
 
 /***/ },
-/* 264 */
+/* 262 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28042,7 +27973,7 @@
 	var LOGIN_WINDOW_CLOSED = exports.LOGIN_WINDOW_CLOSED = 'LOGIN_WINDOW_CLOSED';
 
 /***/ },
-/* 265 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28062,7 +27993,7 @@
 	};
 
 /***/ },
-/* 266 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28079,7 +28010,7 @@
 
 	var _reduxSimpleRouter = __webpack_require__(234);
 
-	var _uiActions = __webpack_require__(263);
+	var _uiActions = __webpack_require__(261);
 
 	var uiActions = _interopRequireWildcard(_uiActions);
 
@@ -28134,7 +28065,7 @@
 	exports.default = NavBarUser;
 
 /***/ },
-/* 267 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28150,7 +28081,7 @@
 
 	var _config = __webpack_require__(257);
 
-	var _authedConstants = __webpack_require__(268);
+	var _authedConstants = __webpack_require__(266);
 
 	var types = _interopRequireWildcard(_authedConstants);
 
@@ -28166,7 +28097,7 @@
 	}
 
 /***/ },
-/* 268 */
+/* 266 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28177,7 +28108,7 @@
 	var GET_USER = exports.GET_USER = 'GET_USER';
 
 /***/ },
-/* 269 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28244,7 +28175,7 @@
 	exports.default = Profile;
 
 /***/ },
-/* 270 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28311,7 +28242,7 @@
 	exports.default = ProfileEdit;
 
 /***/ },
-/* 271 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28334,15 +28265,15 @@
 
 	var postActions = _interopRequireWildcard(_postActions);
 
-	var _tagHintsActions = __webpack_require__(272);
+	var _tagHintsActions = __webpack_require__(270);
 
 	var tagHintsActions = _interopRequireWildcard(_tagHintsActions);
 
-	var _talentHintsActions = __webpack_require__(289);
+	var _talentHintsActions = __webpack_require__(271);
 
 	var talentHintsActions = _interopRequireWildcard(_talentHintsActions);
 
-	var _formActions = __webpack_require__(292);
+	var _formActions = __webpack_require__(272);
 
 	var formActions = _interopRequireWildcard(_formActions);
 
@@ -28350,7 +28281,7 @@
 
 	var _reactAutocomplete2 = _interopRequireDefault(_reactAutocomplete);
 
-	var _Talent = __webpack_require__(260);
+	var _Talent = __webpack_require__(278);
 
 	var _Talent2 = _interopRequireDefault(_Talent);
 
@@ -28383,53 +28314,25 @@
 		_createClass(Form, [{
 			key: 'submitForm',
 			value: function submitForm() {
-				console.log("Submitting the form");
-
-				var postData = {
-					"title": this._title.value,
-					"tag_line": this._tagLine.value,
-					"description": this._description.value
-				};
-
-				// "talent_needed": req.body.talent_needed || null,
-				// "tags": req.body.tags || null,
-				// "feature_img": req.body.feature_img || null,
-				// "imgs": req.body.imgs || null,
-				// "contact": req.body.contact != null ?
-				// 	{
-				// 		"email": req.body.contact.email || null,
-				// 		"phone": req.body.contact.phone || null,
-				// 		"github": req.body.contact.github || null,
-				// 		"website": req.body.contact.website || null
-				// 	}
-				// submit the post
-				this.props.dispatch(postActions.createPost(postData));
-				// TODO: need to reset all the temp features
-				// TODO: need to change the path to the home page
+				// submit the post and reset the form data
+				this.props.dispatch(postActions.createPost(this.props.formData));
+				// TODO: BAD doens't confirm it was posted correctly
+				// 			need to create a state saying that post was successfully posted
+				this.props.dispatch(formActions.resetFormState());
 			}
 
 			// updateFormData(...data){
 		}, {
 			key: 'updateFormData',
 			value: function updateFormData(formData) {
-
 				console.log("Update Form");
-				// const formData = {
-				// 	...this.props.formData
-				// 	"title": this._title.value,
-				// 	"tag_line": this._tagLine.value,
-				// 	"description": this._description.value,
-				// 	...data[0]
-				// }
-
-				// console.log(formData);
-
 				this.props.dispatch(formActions.setTempPostData(formData));
 			}
 		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {
-				// TODO: need to reset all the temp features
+				// reset the form data when unmounted
+				this.props.dispatch(formActions.resetFormState());
 			}
 		}, {
 			key: 'render',
@@ -28514,14 +28417,9 @@
 						},
 						onSelect: function onSelect(value, item) {
 							console.log("ITEM SECLTED: ", item);
-							_this2.updateFormData({
-								tags: [item]
-							});
+							_this2.props.dispatch(formActions.addTempTag(item));
 						},
 						onChange: function onChange(event, value) {
-							// TODO: need to only dispatch a request to get
-							// hints only if stopped typing
-							console.log("AUTOCOMPELETE CHANGING: ");
 							_this2.props.dispatch(tagHintsActions.getTagHints(value));
 						},
 						renderItem: function renderItem(item, isHighlighted) {
@@ -28535,11 +28433,25 @@
 							);
 						}
 					}),
-					' ',
+					_react2.default.createElement(
+						'div',
+						{ className: 'form-talents' },
+						this.props.formData.tags.map(function (item, index) {
+							return _react2.default.createElement(
+								'h3',
+								{
+									key: item._id,
+									onClick: function onClick() {
+										_this2.props.dispatch(formActions.removeTempTag(item, index));
+									} },
+								item.name
+							);
+						})
+					),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'label',
-						{ htmlFor: 'tags' },
+						{ htmlFor: 'talents' },
 						'Talent Needed'
 					),
 					_react2.default.createElement(_reactAutocomplete2.default, { items: this.props.talentHints,
@@ -28547,15 +28459,9 @@
 							return item.name;
 						},
 						onSelect: function onSelect(value, item) {
-							console.log("TALENT ITEM SECLTED: ", item);
-							_this2.updateFormData({
-								talent_needed: [item]
-							});
+							_this2.props.dispatch(formActions.addTempTalent(item));
 						},
 						onChange: function onChange(event, value) {
-							// TODO: need to only dispatch a request to get
-							// hints only if stopped typing
-							console.log("TALENT AUTOCOMPELETE CHANGING: ");
 							_this2.props.dispatch(talentHintsActions.getTalentHints(value));
 						},
 						renderItem: function renderItem(item, isHighlighted) {
@@ -28567,7 +28473,20 @@
 								color: item.color });
 						}
 					}),
-					' ',
+					_react2.default.createElement(
+						'div',
+						{ className: 'form-talents' },
+						this.props.formData.talent_needed.map(function (item, index) {
+							return _react2.default.createElement(_Talent2.default, {
+								key: item._id,
+								talent: item.name,
+								color: item.color,
+								handleClick: function handleClick() {
+									_this2.props.dispatch(formActions.removeTempTalent(item, index));
+								}
+							});
+						})
+					),
 					_react2.default.createElement('br', null),
 					_react2.default.createElement(
 						'label',
@@ -28583,6 +28502,14 @@
 								return _this2.submitForm();
 							} },
 						'Submit'
+					),
+					_react2.default.createElement(
+						'button',
+						{
+							onClick: function onClick() {
+								_this2.props.dispatch(formActions.resetFormState());
+							} },
+						'Reset'
 					)
 				);
 			}
@@ -28590,10 +28517,17 @@
 
 		return Form;
 	})(_react2.default.Component)) || _class);
+
+	/*<Talent
+		key={item._id}
+		talent={item.name}
+		color={item.color} />
+	*/
+
 	exports.default = Form;
 
 /***/ },
-/* 272 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28616,6 +28550,95 @@
 	    type: 'GET_TAG_HINT',
 	    promise: _axios2.default.get(_config.backend_url + '/api/tag/' + query)
 	  };
+	}
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getTalentHints = getTalentHints;
+
+	var _axios = __webpack_require__(239);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _config = __webpack_require__(257);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getTalentHints(query) {
+	  return {
+	    type: 'GET_TALENT_HINT',
+	    promise: _axios2.default.get(_config.backend_url + '/api/talent/' + query)
+	  };
+	}
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.setTempPostData = setTempPostData;
+	exports.addTempTag = addTempTag;
+	exports.removeTempTag = removeTempTag;
+	exports.addTempTalent = addTempTalent;
+	exports.removeTempTalent = removeTempTalent;
+	exports.resetFormState = resetFormState;
+
+	var _axios = __webpack_require__(239);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _config = __webpack_require__(257);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function setTempPostData(formData) {
+		return {
+			type: 'SET_TEMP_POST_DATA',
+			formData: formData
+		};
+	}
+
+	function addTempTag(tag) {
+		return {
+			type: 'ADD_TEMP_TAG',
+			tag: tag
+		};
+	}
+
+	function removeTempTag(tag, index) {
+		return {
+			type: 'REMOVE_TEMP_TAG',
+			index: index
+		};
+	}
+
+	function addTempTalent(talent) {
+		return {
+			type: 'ADD_TEMP_TALENT',
+			talent: talent
+		};
+	}
+
+	function removeTempTalent(talent, index) {
+		return {
+			type: 'REMOVE_TEMP_TALENT',
+			index: index
+		};
+	}
+
+	function resetFormState() {
+		return { type: 'REST_FORM_STATE' };
 	}
 
 /***/ },
@@ -29555,38 +29578,67 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(5);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(216);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (props) {
+		var style = {
+			"background": props.color
+		};
+		return _react2.default.createElement(
+			'div',
+			{ className: 'tag talent', onClick: props.handleClick, style: style },
+			props.talent
+		);
+	};
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
 	var _redux = __webpack_require__(223);
 
-	var _reduxThunk = __webpack_require__(279);
+	var _reduxThunk = __webpack_require__(280);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _promiseMiddleware = __webpack_require__(280);
+	var _promiseMiddleware = __webpack_require__(281);
 
 	var _promiseMiddleware2 = _interopRequireDefault(_promiseMiddleware);
 
 	var _reduxSimpleRouter = __webpack_require__(234);
 
-	var _postReducer = __webpack_require__(281);
+	var _postReducer = __webpack_require__(282);
 
 	var _postReducer2 = _interopRequireDefault(_postReducer);
 
-	var _authReducer = __webpack_require__(282);
+	var _authReducer = __webpack_require__(283);
 
 	var _authReducer2 = _interopRequireDefault(_authReducer);
 
-	var _tagHintsReducer = __webpack_require__(283);
+	var _tagHintsReducer = __webpack_require__(284);
 
 	var _tagHintsReducer2 = _interopRequireDefault(_tagHintsReducer);
 
-	var _talentHintsReducer = __webpack_require__(290);
+	var _talentHintsReducer = __webpack_require__(285);
 
 	var _talentHintsReducer2 = _interopRequireDefault(_talentHintsReducer);
 
-	var _formReducer = __webpack_require__(291);
+	var _formReducer = __webpack_require__(286);
 
 	var _formReducer2 = _interopRequireDefault(_formReducer);
 
@@ -29608,7 +29660,7 @@
 	exports.default = store;
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29630,7 +29682,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29674,7 +29726,7 @@
 	}
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29702,6 +29754,8 @@
 
 		switch (action.type) {
 			case types.GET_POSTS:
+				console.log("GOT POST DATA");
+				console.log(action.res.data);
 				return _extends({}, state, {
 					postData: [].concat(_toConsumableArray(action.res.data))
 				});
@@ -29710,14 +29764,10 @@
 			case types.GET_POSTS + "_FAILURE":
 				return state;
 			case types.CREATE_POST:
-				console.log("Succesfully posted");
-				// TODO: dispatch command that post was
-				// created succefully
+				console.log("SUCCESSFULLY POSTED");
 				return state;
 			case types.CREATE_POST + "_FAILURE":
-				console.log("Failed posting post");
-				// TODO: need to dispatch a toastr signalling
-				// what went wrong
+				console.log("FAILED POSTING");
 				return state;
 			case types.LIKE_POST:
 				console.log("Succesfully liked the post!!!");
@@ -29733,7 +29783,7 @@
 	}
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29745,7 +29795,7 @@
 	});
 	exports.default = authedReducer;
 
-	var _authedConstants = __webpack_require__(268);
+	var _authedConstants = __webpack_require__(266);
 
 	var types = _interopRequireWildcard(_authedConstants);
 
@@ -29775,7 +29825,7 @@
 	}
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29802,7 +29852,96 @@
 	}
 
 /***/ },
-/* 284 */
+/* 285 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = talentHintsReducer;
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function talentHintsReducer() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'GET_TALENT_HINT':
+				return [].concat(_toConsumableArray(action.res.data));
+			case 'GET_TALENT_HINT_FAILED':
+				return [];
+			default:
+				return state;
+		}
+	}
+
+/***/ },
+/* 286 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = formReducer;
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var defaultState = {
+		title: "",
+		tag_line: "",
+		description: "",
+		imgs: [],
+		tags: [],
+		talent_needed: []
+	};
+
+	function formReducer() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? defaultState : arguments[0];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case 'SET_USER_TYPING':
+				return _extends({}, state, {
+					userIsTyping: action.isTyping
+				});
+			case 'SET_TEMP_POST_DATA':
+				return _extends({}, state, action.formData);
+			case 'ADD_TEMP_TAG':
+				return _extends({}, state, {
+					tags: [].concat(_toConsumableArray(state.tags), [action.tag])
+				});
+			case 'REMOVE_TEMP_TAG':
+				var index = action.index;
+
+				return _extends({}, state, {
+					tags: [].concat(_toConsumableArray(state.tags.slice(0, index)), _toConsumableArray(state.tags.slice(index + 1)))
+				});
+			case 'ADD_TEMP_TALENT':
+				return _extends({}, state, {
+					talent_needed: [].concat(_toConsumableArray(state.talent_needed), [action.talent])
+				});
+			case 'REMOVE_TEMP_TALENT':
+				var index = action.index;
+
+				return _extends({}, state, {
+					talent_needed: [].concat(_toConsumableArray(state.talent_needed.slice(0, index)), _toConsumableArray(state.talent_needed.slice(index + 1)))
+				});
+			case 'REST_FORM_STATE':
+				return defaultState;
+			default:
+				return state;
+		}
+	}
+
+/***/ },
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29811,7 +29950,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _createBrowserHistory = __webpack_require__(285);
+	var _createBrowserHistory = __webpack_require__(288);
 
 	var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
 
@@ -29841,7 +29980,7 @@
 
 	exports.useBasename = _useBasename3['default'];
 
-	var _useBeforeUnload2 = __webpack_require__(286);
+	var _useBeforeUnload2 = __webpack_require__(289);
 
 	var _useBeforeUnload3 = _interopRequireDefault(_useBeforeUnload2);
 
@@ -29861,20 +30000,20 @@
 
 	// deprecated
 
-	var _enableBeforeUnload2 = __webpack_require__(287);
+	var _enableBeforeUnload2 = __webpack_require__(290);
 
 	var _enableBeforeUnload3 = _interopRequireDefault(_enableBeforeUnload2);
 
 	exports.enableBeforeUnload = _enableBeforeUnload3['default'];
 
-	var _enableQueries2 = __webpack_require__(288);
+	var _enableQueries2 = __webpack_require__(291);
 
 	var _enableQueries3 = _interopRequireDefault(_enableQueries2);
 
 	exports.enableQueries = _enableQueries3['default'];
 
 /***/ },
-/* 285 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -30052,7 +30191,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 286 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -30169,7 +30308,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 287 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30182,7 +30321,7 @@
 
 	var _deprecate2 = _interopRequireDefault(_deprecate);
 
-	var _useBeforeUnload = __webpack_require__(286);
+	var _useBeforeUnload = __webpack_require__(289);
 
 	var _useBeforeUnload2 = _interopRequireDefault(_useBeforeUnload);
 
@@ -30190,7 +30329,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 288 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30211,122 +30350,66 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 289 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.getTalentHints = getTalentHints;
-
-	var _axios = __webpack_require__(239);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _config = __webpack_require__(257);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function getTalentHints(query) {
-	  return {
-	    type: 'GET_TALENT_HINT',
-	    promise: _axios2.default.get(_config.backend_url + '/api/talent/' + query)
-	  };
-	}
-
-/***/ },
-/* 290 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = talentHintsReducer;
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	function talentHintsReducer() {
-		var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-		var action = arguments[1];
-
-		switch (action.type) {
-			case 'GET_TALENT_HINT':
-				return [].concat(_toConsumableArray(action.res.data));
-			case 'GET_TALENT_HINT_FAILED':
-				return [];
-			default:
-				return state;
-		}
-	}
-
-/***/ },
-/* 291 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = formReducer;
-	function formReducer() {
-		var state = arguments.length <= 0 || arguments[0] === undefined ? {
-			tags: [],
-			talent_needed: []
-		} : arguments[0];
-		var action = arguments[1];
-
-		switch (action.type) {
-			case 'SET_USER_TYPING':
-				return _extends({}, state, {
-					userIsTyping: action.isTyping
-				});
-			case 'SET_TEMP_POST_DATA':
-				return _extends({}, state, action.formData);
-			default:
-				return state;
-		}
-	}
-
-/***/ },
 /* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	exports.setTempPostData = setTempPostData;
-	exports.setUserTyping = setUserTyping;
 
-	var _axios = __webpack_require__(239);
+	var _react = __webpack_require__(5);
 
-	var _axios2 = _interopRequireDefault(_axios);
+	var _react2 = _interopRequireDefault(_react);
 
-	var _config = __webpack_require__(257);
+	var _reactRedux = __webpack_require__(216);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function setTempPostData(formData) {
-	  return {
-	    type: 'SET_TEMP_POST_DATA',
-	    formData: formData
-	  };
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	function setUserTyping(isTyping) {
-	  return {
-	    type: 'SET_USER_TYPING',
-	    isTyping: isTyping
-	  };
-	}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PostSocial = (function (_React$Component) {
+		_inherits(PostSocial, _React$Component);
+
+		function PostSocial() {
+			_classCallCheck(this, PostSocial);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(PostSocial).apply(this, arguments));
+		}
+
+		_createClass(PostSocial, [{
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'post-social' },
+					_react2.default.createElement('i', { className: 'fa fa-caret-up like-caret', onClick: function onClick() {
+							return _this2.props.likePost();
+						} }),
+					_react2.default.createElement(
+						'h3',
+						{ className: 'h3__likes' },
+						this.props.like_count
+					)
+				);
+			}
+		}]);
+
+		return PostSocial;
+	})(_react2.default.Component);
+
+	;
+
+	exports.default = PostSocial;
 
 /***/ }
 /******/ ]);

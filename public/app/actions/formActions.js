@@ -8,9 +8,34 @@ export function setTempPostData(formData) {
   }
 }
 
-export function setUserTyping(isTyping){
+export function addTempTag(tag){
 	return {
-		type: 'SET_USER_TYPING',
-		isTyping
+		type: 'ADD_TEMP_TAG',
+		tag
 	}
+}
+
+export function removeTempTag(tag, index){
+	return {
+		type: 'REMOVE_TEMP_TAG',
+		index
+	}	
+}
+
+export function addTempTalent(talent){
+	return {
+		type: 'ADD_TEMP_TALENT',
+		talent
+	}
+}
+
+export function removeTempTalent(talent, index){
+	return {
+		type: 'REMOVE_TEMP_TALENT',
+		index
+	}	
+}
+
+export function resetFormState(){
+	return {type: 'REST_FORM_STATE'}
 }

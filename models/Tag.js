@@ -15,8 +15,7 @@ var TagSchema = new mongoose.Schema({
  	},
 	"icon": { // correlates to the font awesome 
 		type: String,
-		required: true,
-		default: "fa-tag",
+		default: "tag",
 	}
 });
 
