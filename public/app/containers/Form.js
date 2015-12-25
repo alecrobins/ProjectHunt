@@ -5,6 +5,7 @@ import * as tagHintsActions from '../actions/tagHintsActions';
 import * as talentHintsActions from '../actions/talentHintsActions';
 import * as formActions from '../actions/formActions';
 
+import Dropzone from 'react-dropzone';
 import Autocomplete from 'react-autocomplete';
 import Talent from '../components/Talent';
 import Tag from '../components/Tag';
@@ -21,11 +22,13 @@ import Tag from '../components/Tag';
 class Form extends React.Component{
 	
 	submitForm(){
+		console.log("SUBMITTING");
+		console.log(this.props.formData);
 		// submit the post and reset the form data
-		this.props.dispatch(postActions.createPost(this.props.formData));
+		// this.props.dispatch(postActions.createPost(this.props.formData));
 		// TODO: BAD doens't confirm it was posted correctly
 		// 			need to create a state saying that post was successfully posted
-		this.props.dispatch(formActions.resetFormState()) 
+		// this.props.dispatch(formActions.resetFormState()) 
 	}
 	
 	// updateFormData(...data){
@@ -37,6 +40,11 @@ class Form extends React.Component{
 	componentWillUnmount() {
 		// reset the form data when unmounted
 		this.props.dispatch(formActions.resetFormState())
+	}
+
+	onDrop(files){
+		console.log("DROPD");
+		console.log(files);
 	}
 
 	render() {
@@ -149,9 +157,11 @@ class Form extends React.Component{
         <br />
 
 				<label htmlFor="imgs">Upload images</label>
-				<input type="file" name="imgs" ref={(c) => this._imgs = c} /> 
-
-				<button onClick={() => this.submitForm()}>Submit</button>
+			 	<Dropzone onDrop={(files) => {this.onDrop(files)}}>
+           <div>Try dropping some files here, or click to select files to upload.</div>
+        </Dropzone>
+ 
+				<button onClick={() => {this.submitForm()}}>Submit</button>
 				<button
 					onClick={() => {
 						this.props.dispatch(formActions.resetFormState())

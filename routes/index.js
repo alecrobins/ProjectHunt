@@ -7,3 +7,4 @@ exports.passport = require('./Passport');
 exports.actions = require('./Actions');
 exports.talent = require('./Talent');
 exports.tags = require('./Tags');
+exports.upload = require('./upload');

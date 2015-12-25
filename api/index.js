@@ -2,6 +2,7 @@ var routes = require('../routes/');
 var models = require('../models/');
 var config = require('../config');
 var passport = require('passport');
+var multer = require('multer');
 
 module.exports = function(app, connection) {
 
@@ -75,7 +76,20 @@ module.exports = function(app, connection) {
 	app.get('/api/posts/:id', isLoggedIn, db, routes.posts.getPost);
 	app.put('/api/posts/:id', isLoggedIn, db, routes.posts.updatePost);
 	app.delete('/api/posts/:id', isLoggedIn, db, routes.posts.delete);
-	// TODO: add a route for uploading images or videos
+	
+	// UPLOAD
+	
+	// set uploading middleware
+	var uploading = multer({
+	  dest: 'public/uploads/',
+	  limits: {fileSize: 2000000, files:5},
+	  rename: function (fieldname, filename) {
+        return filename+"_"+Date.now();
+    },
+	})
+
+	app.post('/api/upload', uploading.array(), db, routes.upload.upload) ;
+	app.delete('/api/upload', db, routes.upload.deleteUpload) ;
 
 	// TALENT
 	app.post('/api/talent', db, routes.talent.addTalent);
