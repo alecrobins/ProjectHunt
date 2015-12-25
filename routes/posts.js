@@ -4,7 +4,6 @@
 module.exports.getPosts = function (req, res, next) {
 	// var page = req.query.page;
 	// var limit = req.query.limit;
-
 	req.db.Post.paginate({},
 		{
 	   	page: 1, // TODO: generate from params
@@ -15,7 +14,6 @@ module.exports.getPosts = function (req, res, next) {
 	    	// lean: true
 	  	}, function(err, results) {
 			if(err) next(err);
-			console.log(results);
 			res.json(results);
 		});
 }

@@ -15,7 +15,7 @@ export function addTempTag(tag){
 	}
 }
 
-export function removeTempTag(tag, index){
+export function removeTempTag(index){
 	return {
 		type: 'REMOVE_TEMP_TAG',
 		index
@@ -29,7 +29,7 @@ export function addTempTalent(talent){
 	}
 }
 
-export function removeTempTalent(talent, index){
+export function removeTempTalent(index){
 	return {
 		type: 'REMOVE_TEMP_TALENT',
 		index

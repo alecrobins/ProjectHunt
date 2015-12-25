@@ -2,12 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PostSocial from './PostSocial';
 import Talent from './Talent';
+import Tag from './Tag';
 
 class Post extends React.Component {
 
 	render() {
-		<p className="p__main">{this.props.description}</p>
-		var talents;
+		
+		var talents, tags;
+		if(this.props.tags){
+			tags = this.props.tags.map((tag, index) => (
+							<Tag key={tag._id} name={tag.name} icon={tag.icon} />
+						));
+		}else {
+			tags = <p>NO TAGS</p>;
+		}
+
 		if(this.props.talent_needed){
 			talents = this.props.talent_needed.map((talent, index) => (
 							<Talent key={talent._id} talent={talent.name} color={talent.color} />
@@ -38,6 +47,9 @@ class Post extends React.Component {
 						{talents}
 					</div>
 
+					<div className="post__tags">
+						{tags}
+					</div>
 
 				</div>
 				

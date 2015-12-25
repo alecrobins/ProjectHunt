@@ -7,6 +7,7 @@ import * as formActions from '../actions/formActions';
 
 import Autocomplete from 'react-autocomplete';
 import Talent from '../components/Talent';
+import Tag from '../components/Tag';
 
 @connect((state) => {
     return {
@@ -80,11 +81,10 @@ class Form extends React.Component{
 
 				<label htmlFor="talentNeeded">Tags</label>
 				<Autocomplete
-          // ref="tags"
+          ref="_tag"
           items={this.props.tagHints}
           getItemValue={(item) => item.name}
           onSelect={(value, item) => {
-            console.log("ITEM SECLTED: ", item);
             this.props.dispatch(formActions.addTempTag(item));
           }}
           onChange={(event, value) => {
@@ -101,19 +101,20 @@ class Form extends React.Component{
         />
         <div className="form-talents">
 					{this.props.formData.tags.map((item, index) => (
-						<h3
+						<Tag
 							key={item._id}
-							onClick={() => {
-								this.props.dispatch(formActions.removeTempTag(item, index))
-							}}>
-						{item.name}
-					</h3>))}
+							name={item.name}
+							icon={item.icon}
+							handleClick={() => {
+								this.props.dispatch(formActions.removeTempTag(index))
+							}} />
+					))}
         </div>
         <br />
 
 				<label htmlFor="talents">Talent Needed</label>
 				<Autocomplete
-          // ref="talentNeeded"
+          ref="_talent"
           items={this.props.talentHints}
           getItemValue={(item) => item.name}
           onSelect={(value, item) => {
@@ -140,7 +141,7 @@ class Form extends React.Component{
 							talent={item.name}
 							color={item.color} 
 							handleClick={() => {
-								this.props.dispatch(formActions.removeTempTalent(item, index))
+								this.props.dispatch(formActions.removeTempTalent(index))
 							}}
 						/>
 					))}
@@ -162,9 +163,5 @@ class Form extends React.Component{
 	}
 }
 
-/*<Talent
-	key={item._id}
-	talent={item.name}
-	color={item.color} />
-*/
+
 export default Form;
